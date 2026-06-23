@@ -358,7 +358,7 @@ export default function Home({ onOpenModal }) {
 
         <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-16 xl:px-24 w-full relative z-10 py-12 sm:py-16 lg:py-0 order-1 lg:order-none">
           {/* Content container — hero-light-section pins text to dark regardless of dark mode */}
-          <div className="hero-light-section w-full lg:w-[55%]">
+          <div className="hero-light-section force-light-section w-full lg:w-[55%]">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
