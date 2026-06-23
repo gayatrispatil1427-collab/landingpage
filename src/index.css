@@ -253,3 +253,12 @@ body {
   user-select: none;
   -webkit-user-drag: none;
 }
+
+/* Custom App Backgrounds */
+.bg-app-section-light {
+  background-color: #FAF8F5;
+  transition: background-color 0.2s ease;
+}
+.dark-theme-override .bg-app-section-light {
+  background-color: var(--app-background) !important;
+}

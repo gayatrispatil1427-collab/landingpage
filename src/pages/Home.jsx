@@ -338,7 +338,7 @@ export default function Home({ onOpenModal }) {
     >
 
       {/* 1. HERO SECTION */}
-      <section className="relative w-full flex flex-col lg:flex-row lg:h-[calc(100vh-5rem)] lg:min-h-[650px] lg:items-center overflow-hidden bg-[#FAF8F5]">
+      <section className="relative w-full flex flex-col lg:flex-row lg:h-[calc(100vh-5rem)] lg:min-h-[650px] lg:items-center overflow-hidden bg-app-section-light">
         {/* Full-bleed Widescreen Banner Image */}
         <div className="relative w-full lg:absolute lg:inset-0 lg:z-0 lg:h-full lg:w-full order-2 lg:order-none px-6 sm:px-12 lg:px-0 pb-12 lg:pb-0">
           <div className="w-full aspect-[2/3] max-w-sm mx-auto lg:max-w-none lg:aspect-auto lg:h-full rounded-3xl lg:rounded-none overflow-hidden shadow-lg lg:shadow-none border border-slate-200 bg-white dark:bg-slate-800 p-3 lg:p-0 lg:border-none lg:bg-transparent">
@@ -522,7 +522,7 @@ export default function Home({ onOpenModal }) {
 
 
       {/* 3. ABOUT RAHUL KULKARNI (Storytelling layout & timeline) */}
-      <section className="py-24 bg-[#FAF8F5]">
+      <section className="py-24 bg-app-section-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -771,7 +771,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 5. SERVICES (Premium Bento Grid Layout) */}
-      <section className="py-24 bg-[#FAF8F5] border-y border-slate-200/40 services-light-section">
+      <section className="py-24 bg-app-section-light border-y border-slate-200/40 services-light-section">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Advisory Avenues</span>
@@ -889,7 +889,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 8. FINANCIAL JOURNEY ROADMAP (Interactive timeline) */}
-      <section className="py-24 bg-[#FAF8F5] border-b border-slate-200/30">
+      <section className="py-24 bg-app-section-light border-b border-slate-200/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Methodology</span>
@@ -1104,7 +1104,7 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-app-section-light dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div
                 animate={{ y: [0, -6, 0] }}
@@ -1122,7 +1122,7 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-app-section-light dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div
                 animate={{ y: [0, -6, 0] }}
@@ -1140,7 +1140,7 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-app-section-light dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div
                 animate={{ y: [0, -6, 0] }}
@@ -1158,7 +1158,7 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-app-section-light dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div
                 animate={{ y: [0, -6, 0] }}
@@ -1176,7 +1176,7 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-app-section-light dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div
                 animate={{ y: [0, -6, 0] }}
@@ -1194,7 +1194,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 10. INTERACTIVE SIP CALCULATOR */}
-      <section className="py-24 bg-[#FAF8F5] border-y border-slate-200/40">
+      <section className="py-24 bg-app-section-light border-y border-slate-200/40">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-100 shadow-xl">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -1261,7 +1261,7 @@ export default function Home({ onOpenModal }) {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 bg-[#FAF8F5] border border-slate-100 rounded-2xl p-6 md:p-8 flex flex-col justify-between space-y-6">
+              <div className="lg:col-span-5 bg-app-section-light border border-slate-100 rounded-2xl p-6 md:p-8 flex flex-col justify-between space-y-6">
                 <div>
                   <h4 className="font-serif text-sm font-bold text-slate-800 border-b border-slate-200/50 pb-2">Future Projection</h4>
 
@@ -1308,7 +1308,7 @@ export default function Home({ onOpenModal }) {
             <div className="mx-auto mt-4 h-1 w-20 bg-primary rounded-full" />
           </div>
 
-          <div className="relative bg-[#FAF8F5] rounded-3xl p-8 md:p-12 border border-slate-100 overflow-hidden shadow-xl">
+          <div className="relative bg-app-section-light rounded-3xl p-8 md:p-12 border border-slate-100 overflow-hidden shadow-xl">
             <Quote className="absolute right-8 top-8 h-24 w-24 text-primary/5 shrink-0" />
 
             <AnimatePresence mode="wait">
@@ -1357,7 +1357,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 12. PHOTO EXPERIENCE (Pinterest style masonry layout) */}
-      <section className="py-24 bg-[#FAF8F5] border-t border-slate-200/40">
+      <section className="py-24 bg-app-section-light border-t border-slate-200/40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Gallery</span>
@@ -1432,7 +1432,7 @@ export default function Home({ onOpenModal }) {
       {/* 13. FINANCIAL HEALTH CHECKUP FORM */}
       <section id="checkup-section" className="py-24 bg-white border-t border-slate-100">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <div className="bg-[#FAF8F5] rounded-3xl p-8 md:p-12 border border-slate-100 shadow-xl relative overflow-hidden">
+          <div className="bg-app-section-light rounded-3xl p-8 md:p-12 border border-slate-100 shadow-xl relative overflow-hidden">
 
             <div className="text-center mb-10">
               <span className="text-xs font-semibold tracking-widest text-primary uppercase">Diagnostic Tool</span>
@@ -1690,7 +1690,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 14. FAQ ACCORDION */}
-      <section className="py-24 bg-[#FAF8F5] border-t border-slate-200/40">
+      <section className="py-24 bg-app-section-light border-t border-slate-200/40">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <div className="text-center mb-16">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Support Desk</span>
@@ -1722,7 +1722,7 @@ export default function Home({ onOpenModal }) {
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="border-t border-slate-100 bg-[#FAF8F5]"
+                      className="border-t border-slate-100 bg-app-section-light"
                     >
                       <p className="p-5 text-xs text-slate-500 leading-relaxed">{faq.a}</p>
                     </motion.div>
