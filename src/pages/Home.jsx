@@ -210,12 +210,12 @@ export default function Home({ onOpenModal }) {
         } ${service.isPremium ? 'bg-primary/5' : ''}`}>
         <div>
           <div className={`h-10 w-10 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform mb-6 font-bold text-xs ${service.isGold
-              ? 'bg-gold-500/10 text-gold-500'
-              : 'bg-primary/10 text-primary'
+            ? 'bg-gold-500/10 text-gold-500'
+            : 'bg-primary/10 text-primary'
             }`}>
             {isCustomIcon ? service.icon : <IconComponent className="h-5 w-5" />}
           </div>
-          <h3 className="font-serif text-lg font-bold text-[#111827] mb-2">{service.title}</h3>
+          <h3 className="font-serif text-lg font-bold text-slate-900 dark:text-white mb-2">{service.title}</h3>
           <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
             {service.desc}
           </p>
@@ -338,7 +338,7 @@ export default function Home({ onOpenModal }) {
     >
 
       {/* 1. HERO SECTION */}
-      <section className="relative w-full flex flex-col lg:flex-row lg:h-[calc(100vh-5rem)] lg:min-h-[650px] lg:items-center overflow-hidden bg-app-section-light">
+      <section className="relative w-full flex flex-col lg:flex-row lg:h-[calc(100vh-5rem)] lg:min-h-[650px] lg:items-center overflow-hidden bg-[#FAF8F5]">
         {/* Full-bleed Widescreen Banner Image */}
         <div className="relative w-full lg:absolute lg:inset-0 lg:z-0 lg:h-full lg:w-full order-2 lg:order-none px-6 sm:px-12 lg:px-0 pb-12 lg:pb-0">
           <div className="w-full aspect-[2/3] max-w-sm mx-auto lg:max-w-none lg:aspect-auto lg:h-full rounded-3xl lg:rounded-none overflow-hidden shadow-lg lg:shadow-none border border-slate-200 bg-white dark:bg-slate-800 p-3 lg:p-0 lg:border-none lg:bg-transparent">
@@ -370,14 +370,12 @@ export default function Home({ onOpenModal }) {
                   Premium Financial Brand
                 </span>
               </div>
-
-
-              <h1 className="font-sans text-4xl sm:text-5xl lg:text-[54px] font-bold text-[#111827] dark:text-white leading-[1.15] tracking-tight">
+              <h1 className="font-sans text-4xl sm:text-5xl lg:text-[54px] font-bold text-slate-900 dark:text-white leading-[1.15] tracking-tight">
                 <span className="text-primary">Secure</span> Your Family's Future <br className="hidden sm:inline" />
                 With <span className="text-primary">Smart</span> Financial Planning
               </h1>
 
-              <p className="text-sm sm:text-base lg:text-lg text-[#374151] dark:text-slate-300 max-w-xl leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
                 Helping families protect wealth, build assets and achieve long-term financial security through expert financial planning.
               </p>
 
@@ -388,8 +386,8 @@ export default function Home({ onOpenModal }) {
                   whileTap={{ scale: 0.98 }}
                   onClick={() => { setActiveBtn(1); onOpenModal(); }}
                   className={`rounded-lg px-8 py-4 text-xs font-bold tracking-wider uppercase shadow-lg transition-all duration-300 cursor-pointer ${activeBtn === 1
-                      ? 'bg-primary text-white shadow-primary/20 border border-primary'
-                      : 'bg-white/80 dark:bg-slate-800/80 text-primary dark:text-white border border-slate-200 dark:border-slate-700/50 shadow-sm hover:bg-primary hover:text-white hover:border-primary hover:shadow-primary/20'
+                    ? 'bg-primary text-white shadow-primary/20 border border-primary'
+                    : 'bg-white/80 text-primary border border-slate-200 shadow-sm hover:bg-primary hover:text-white hover:border-primary hover:shadow-primary/20'
                     }`}
                 >
                   Book Free Consultation
@@ -400,8 +398,8 @@ export default function Home({ onOpenModal }) {
                   href="#checkup-section"
                   onClick={() => setActiveBtn(2)}
                   className={`rounded-lg px-8 py-4 text-xs font-bold tracking-wider uppercase flex items-center justify-center shadow-sm cursor-pointer transition-all duration-300 ${activeBtn === 2
-                      ? 'bg-primary text-white border border-primary shadow-lg shadow-primary/20'
-                      : 'bg-white/80 dark:bg-slate-800/80 text-primary dark:text-white border border-slate-200 dark:border-slate-700/50 hover:bg-primary hover:text-white hover:border-primary hover:shadow-lg hover:shadow-primary/20'
+                    ? 'bg-primary text-white border border-primary shadow-lg shadow-primary/20'
+                    : 'bg-white/80 text-primary border border-slate-200 hover:bg-primary hover:text-white hover:border-primary hover:shadow-lg hover:shadow-primary/20'
                     }`}
                 >
                   Financial Health Checkup
@@ -411,23 +409,23 @@ export default function Home({ onOpenModal }) {
               {/* Badges with individual icons and stacked text */}
               <div className="grid grid-cols-3 gap-2 sm:gap-x-8 sm:gap-y-4 pt-6 border-t border-slate-300/40 max-w-xl">
                 <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-3">
-                  <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-[#111827] dark:text-slate-200 shrink-0" />
+                  <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-slate-900 dark:text-white shrink-0" />
                   <div className="flex flex-col">
-                    <span className="font-bold text-xs sm:text-sm text-[#111827] dark:text-white leading-none">15+ Years</span>
+                    <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white leading-none">15+ Years</span>
                     <span className="text-[8px] sm:text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold mt-1">Experience</span>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-3">
-                  <Users className="h-6 w-6 sm:h-8 sm:w-8 text-[#111827] dark:text-slate-200 shrink-0" />
+                  <Users className="h-6 w-6 sm:h-8 sm:w-8 text-slate-900 dark:text-white shrink-0" />
                   <div className="flex flex-col">
-                    <span className="font-bold text-xs sm:text-sm text-[#111827] dark:text-white leading-none">1,000+ Families</span>
+                    <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white leading-none">1,000+ Families</span>
                     <span className="text-[8px] sm:text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold mt-1">Protected</span>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-3">
-                  <Award className="h-6 w-6 sm:h-8 sm:w-8 text-[#111827] dark:text-slate-200 shrink-0" />
+                  <Award className="h-6 w-6 sm:h-8 sm:w-8 text-slate-900 dark:text-white shrink-0" />
                   <div className="flex flex-col">
-                    <span className="font-bold text-xs sm:text-sm text-[#111827] dark:text-white leading-none">MDRT</span>
+                    <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white leading-none">MDRT</span>
                     <span className="text-[8px] sm:text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold mt-1">Qualified</span>
                   </div>
                 </div>
@@ -522,7 +520,7 @@ export default function Home({ onOpenModal }) {
 
 
       {/* 3. ABOUT RAHUL KULKARNI (Storytelling layout & timeline) */}
-      <section className="py-24 bg-app-section-light">
+      <section className="py-24 bg-[#FAF8F5]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -771,7 +769,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 5. SERVICES (Premium Bento Grid Layout) */}
-      <section className="py-24 bg-app-section-light border-y border-slate-200/40 services-light-section">
+      <section className="py-24 bg-[#FAF8F5] border-y border-slate-200/40 services-light-section">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Advisory Avenues</span>
@@ -889,7 +887,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 8. FINANCIAL JOURNEY ROADMAP (Interactive timeline) */}
-      <section className="py-24 bg-app-section-light border-b border-slate-200/30">
+      <section className="py-24 bg-[#FAF8F5] border-b border-slate-200/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Methodology</span>
@@ -910,8 +908,8 @@ export default function Home({ onOpenModal }) {
               transition={{ duration: 0.5, ease: 'easeOut' }}
               onClick={() => setActiveJourneyStep(0)}
               className={`relative p-4 rounded-xl border text-center cursor-pointer overflow-hidden transition-all duration-500 focus:outline-none ${activeJourneyStep === 0
-                  ? 'bg-primary border-primary shadow-[0_0_20px_4px_rgba(37,99,235,0.35)] -translate-y-1.5 scale-[1.03]'
-                  : 'bg-white border-slate-200/60 shadow-sm hover:shadow-md hover:-translate-y-1'
+                ? 'bg-primary border-primary shadow-[0_0_20px_4px_rgba(37,99,235,0.35)] -translate-y-1.5 scale-[1.03]'
+                : 'bg-white border-slate-200/60 shadow-sm hover:shadow-md hover:-translate-y-1'
                 }`}
             >
               <motion.span
@@ -930,8 +928,8 @@ export default function Home({ onOpenModal }) {
               transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
               onClick={() => setActiveJourneyStep(1)}
               className={`relative p-4 rounded-xl border text-center cursor-pointer overflow-hidden transition-all duration-500 focus:outline-none ${activeJourneyStep === 1
-                  ? 'bg-primary border-primary shadow-[0_0_20px_4px_rgba(37,99,235,0.35)] -translate-y-1.5 scale-[1.03]'
-                  : 'bg-white border-slate-200/60 shadow-sm hover:shadow-md hover:-translate-y-1'
+                ? 'bg-primary border-primary shadow-[0_0_20px_4px_rgba(37,99,235,0.35)] -translate-y-1.5 scale-[1.03]'
+                : 'bg-white border-slate-200/60 shadow-sm hover:shadow-md hover:-translate-y-1'
                 }`}
             >
               <motion.span
@@ -951,8 +949,8 @@ export default function Home({ onOpenModal }) {
               style={{ transformPerspective: 800 }}
               onClick={() => setActiveJourneyStep(2)}
               className={`relative p-4 rounded-xl border text-center cursor-pointer overflow-hidden transition-all duration-500 focus:outline-none ${activeJourneyStep === 2
-                  ? 'bg-primary border-primary shadow-[0_0_20px_4px_rgba(37,99,235,0.35)] -translate-y-1.5 scale-[1.03]'
-                  : 'bg-white border-slate-200/60 shadow-sm hover:shadow-md hover:-translate-y-1'
+                ? 'bg-primary border-primary shadow-[0_0_20px_4px_rgba(37,99,235,0.35)] -translate-y-1.5 scale-[1.03]'
+                : 'bg-white border-slate-200/60 shadow-sm hover:shadow-md hover:-translate-y-1'
                 }`}
             >
               <motion.span
@@ -971,8 +969,8 @@ export default function Home({ onOpenModal }) {
               transition={{ type: 'spring', stiffness: 200, damping: 12, delay: 0.25 }}
               onClick={() => setActiveJourneyStep(3)}
               className={`relative p-4 rounded-xl border text-center cursor-pointer overflow-hidden transition-all duration-500 focus:outline-none ${activeJourneyStep === 3
-                  ? 'bg-primary border-primary shadow-[0_0_20px_4px_rgba(37,99,235,0.35)] -translate-y-1.5 scale-[1.03]'
-                  : 'bg-white border-slate-200/60 shadow-sm hover:shadow-md hover:-translate-y-1'
+                ? 'bg-primary border-primary shadow-[0_0_20px_4px_rgba(37,99,235,0.35)] -translate-y-1.5 scale-[1.03]'
+                : 'bg-white border-slate-200/60 shadow-sm hover:shadow-md hover:-translate-y-1'
                 }`}
             >
               <motion.span
@@ -991,8 +989,8 @@ export default function Home({ onOpenModal }) {
               transition={{ duration: 0.55, ease: 'easeOut', delay: 0.35 }}
               onClick={() => setActiveJourneyStep(4)}
               className={`relative p-4 rounded-xl border text-center cursor-pointer overflow-hidden transition-all duration-500 focus:outline-none ${activeJourneyStep === 4
-                  ? 'bg-primary border-primary shadow-[0_0_20px_4px_rgba(37,99,235,0.35)] -translate-y-1.5 scale-[1.03]'
-                  : 'bg-white border-slate-200/60 shadow-sm hover:shadow-md hover:-translate-y-1'
+                ? 'bg-primary border-primary shadow-[0_0_20px_4px_rgba(37,99,235,0.35)] -translate-y-1.5 scale-[1.03]'
+                : 'bg-white border-slate-200/60 shadow-sm hover:shadow-md hover:-translate-y-1'
                 }`}
             >
               <motion.span
@@ -1104,7 +1102,7 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-app-section-light dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div
                 animate={{ y: [0, -6, 0] }}
@@ -1122,7 +1120,7 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-app-section-light dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div
                 animate={{ y: [0, -6, 0] }}
@@ -1140,7 +1138,7 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-app-section-light dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div
                 animate={{ y: [0, -6, 0] }}
@@ -1158,7 +1156,7 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-app-section-light dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div
                 animate={{ y: [0, -6, 0] }}
@@ -1176,7 +1174,7 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-app-section-light dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div
                 animate={{ y: [0, -6, 0] }}
@@ -1194,7 +1192,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 10. INTERACTIVE SIP CALCULATOR */}
-      <section className="py-24 bg-app-section-light border-y border-slate-200/40">
+      <section className="py-24 bg-[#FAF8F5] border-y border-slate-200/40">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="bg-white rounded-3xl p-8 md:p-12 border border-slate-100 shadow-xl">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -1203,7 +1201,7 @@ export default function Home({ onOpenModal }) {
                 <span className="text-xs font-semibold tracking-widest text-primary uppercase flex items-center gap-1.5">
                   <TrendingUp className="h-4 w-4 text-gold-500" /> Compound Interest Planning
                 </span>
-                <h3 className="font-serif text-2xl font-bold text-[#111827]">
+                <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white">
                   Interactive SIP Calculator
                 </h3>
                 <p className="text-xs text-slate-500">
@@ -1261,7 +1259,7 @@ export default function Home({ onOpenModal }) {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 bg-app-section-light border border-slate-100 rounded-2xl p-6 md:p-8 flex flex-col justify-between space-y-6">
+              <div className="lg:col-span-5 bg-[#FAF8F5] border border-slate-100 rounded-2xl p-6 md:p-8 flex flex-col justify-between space-y-6">
                 <div>
                   <h4 className="font-serif text-sm font-bold text-slate-800 border-b border-slate-200/50 pb-2">Future Projection</h4>
 
@@ -1308,7 +1306,7 @@ export default function Home({ onOpenModal }) {
             <div className="mx-auto mt-4 h-1 w-20 bg-primary rounded-full" />
           </div>
 
-          <div className="relative bg-app-section-light rounded-3xl p-8 md:p-12 border border-slate-100 overflow-hidden shadow-xl">
+          <div className="relative bg-[#FAF8F5] rounded-3xl p-8 md:p-12 border border-slate-100 overflow-hidden shadow-xl">
             <Quote className="absolute right-8 top-8 h-24 w-24 text-primary/5 shrink-0" />
 
             <AnimatePresence mode="wait">
@@ -1357,7 +1355,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 12. PHOTO EXPERIENCE (Pinterest style masonry layout) */}
-      <section className="py-24 bg-app-section-light border-t border-slate-200/40">
+      <section className="py-24 bg-[#FAF8F5] border-t border-slate-200/40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Gallery</span>
@@ -1432,7 +1430,7 @@ export default function Home({ onOpenModal }) {
       {/* 13. FINANCIAL HEALTH CHECKUP FORM */}
       <section id="checkup-section" className="py-24 bg-white border-t border-slate-100">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <div className="bg-app-section-light rounded-3xl p-8 md:p-12 border border-slate-100 shadow-xl relative overflow-hidden">
+          <div className="bg-[#FAF8F5] rounded-3xl p-8 md:p-12 border border-slate-100 shadow-xl relative overflow-hidden">
 
             <div className="text-center mb-10">
               <span className="text-xs font-semibold tracking-widest text-primary uppercase">Diagnostic Tool</span>
@@ -1690,7 +1688,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 14. FAQ ACCORDION */}
-      <section className="py-24 bg-app-section-light border-t border-slate-200/40">
+      <section className="py-24 bg-[#FAF8F5] border-t border-slate-200/40">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <div className="text-center mb-16">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Support Desk</span>
@@ -1722,7 +1720,7 @@ export default function Home({ onOpenModal }) {
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="border-t border-slate-100 bg-app-section-light"
+                      className="border-t border-slate-100 bg-[#FAF8F5]"
                     >
                       <p className="p-5 text-xs text-slate-500 leading-relaxed">{faq.a}</p>
                     </motion.div>

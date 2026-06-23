@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, AlertCircle, ChevronRight, ChevronLeft, ShieldCheck, Heart, Award, Trophy } from 'lucide-react';
+import { CheckCircle2, AlertCircle, ChevronRight, ChevronLeft, ShieldCheck, Heart, Award, Trophy, ArrowLeft } from 'lucide-react';
 
 export default function FinancialCheckup() {
   const [step, setStep] = useState(1);
@@ -135,6 +136,17 @@ export default function FinancialCheckup() {
 
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         
+        {/* Back Button — Mobile Only */}
+        <div className="md:hidden mb-6">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Home
+          </Link>
+        </div>
+
         {/* Title Block */}
         <div className="text-center mb-10">
           <span className="text-xs font-semibold tracking-widest text-primary uppercase">Diagnostic Tool</span>

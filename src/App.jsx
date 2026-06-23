@@ -62,19 +62,19 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      
+
       {/* Scroll progress indicator */}
       <ScrollProgress />
 
       {/* Main Layout Container */}
       <div className={`flex flex-col min-h-screen ${isDarkMode ? 'dark-theme-override' : ''}`}>
         <Navbar onOpenModal={openModal} isDarkMode={isDarkMode} onToggleDarkMode={toggleDarkMode} />
-        
+
         {/* Page Content */}
         <main className="flex-grow">
           <AnimatedRoutes onOpenModal={openModal} />
         </main>
-        
+
         <Footer />
       </div>
 

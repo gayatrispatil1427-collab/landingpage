@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Award, Briefcase, GraduationCap, Heart, Milestone, ShieldCheck, Target, Eye } from 'lucide-react';
+import { Award, Briefcase, GraduationCap, Heart, Milestone, ShieldCheck, Target, Eye, ArrowLeft } from 'lucide-react';
 import Counter from '../components/Counter';
 import portraitImg from '../assets/rahul-portrait.jpeg';
 import awardImg from '../assets/rahul-award.jpeg';
@@ -68,6 +69,17 @@ export default function About() {
       <div className="absolute bottom-40 right-10 -z-10 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Back Button — Mobile Only */}
+        <div className="md:hidden mb-6">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Home
+          </Link>
+        </div>
         
         {/* Profile / Intro Section */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-center">

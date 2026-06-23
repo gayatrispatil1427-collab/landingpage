@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, CheckCircle2, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, MessageSquare, ArrowLeft } from 'lucide-react';
 
 export default function Contact() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -32,6 +33,17 @@ export default function Contact() {
       <div className="absolute bottom-20 right-10 -z-10 h-96 w-96 rounded-full bg-gold-500/5 blur-3xl" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Back Button — Mobile Only */}
+        <div className="md:hidden mb-6">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Home
+          </Link>
+        </div>
         
         {/* Header Block */}
         <div className="text-center mb-16 max-w-3xl mx-auto">

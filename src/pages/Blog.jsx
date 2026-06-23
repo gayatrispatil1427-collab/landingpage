@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, User, ArrowRight, BookOpen } from 'lucide-react';
+import { Search, User, ArrowRight, BookOpen, ArrowLeft } from 'lucide-react';
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -94,6 +95,17 @@ export default function Blog() {
       <div className="absolute bottom-20 left-10 -z-10 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Back Button — Mobile Only */}
+        <div className="md:hidden mb-6">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Home
+          </Link>
+        </div>
         
         {/* Header block */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
