@@ -75,17 +75,17 @@ body {
   color: var(--app-text) !important;
 }
 
-/* Force dark mode color standards — exempt .hero-light-section & .services-light-section */
-.dark-theme-override .text-slate-800:not(.services-light-section *),
-.dark-theme-override .text-slate-700:not(.services-light-section *),
-.dark-theme-override .text-slate-900:not(.services-light-section *),
-.dark-theme-override .text-slate-950:not(.services-light-section *),
-.dark-theme-override h1:not(.hero-light-section *):not(.services-light-section *),
-.dark-theme-override h2:not(.hero-light-section *):not(.services-light-section *),
-.dark-theme-override h3:not(.hero-light-section *):not(.services-light-section *),
-.dark-theme-override h4:not(.hero-light-section *):not(.services-light-section *),
-.dark-theme-override p:not(.hero-light-section *):not(.services-light-section *),
-.dark-theme-override span:not(.hero-light-section *):not(.services-light-section *):not(.text-primary):not(.text-secondary):not(.text-accent):not(.text-emerald-600):not(.text-red-500):not(.text-amber-600):not(.text-amber-500):not(.text-blue-600) {
+/* Force dark mode color standards — exempt .hero-light-section, .services-light-section & .force-light-section */
+.dark-theme-override .text-slate-800:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .text-slate-700:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .text-slate-900:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .text-slate-950:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override h1:not(.hero-light-section *):not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override h2:not(.hero-light-section *):not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override h3:not(.hero-light-section *):not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override h4:not(.hero-light-section *):not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override p:not(.hero-light-section *):not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override span:not(.hero-light-section *):not(.services-light-section *):not(.force-light-section *):not(.text-primary):not(.text-secondary):not(.text-accent):not(.text-emerald-600):not(.text-red-500):not(.text-amber-600):not(.text-amber-500):not(.text-blue-600) {
   color: #F8FAFC !important;
   opacity: 1 !important;
 }
@@ -112,31 +112,31 @@ body {
 
 
 
-.dark-theme-override .text-slate-655:not(.services-light-section *),
-.dark-theme-override .text-slate-550:not(.services-light-section *),
-.dark-theme-override .text-slate-600:not(.services-light-section *),
-.dark-theme-override .text-slate-500:not(.services-light-section *),
-.dark-theme-override .text-slate-400:not(.services-light-section *) {
+.dark-theme-override .text-slate-655:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .text-slate-550:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .text-slate-600:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .text-slate-500:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .text-slate-400:not(.services-light-section *):not(.force-light-section *) {
   color: #94A3B8 !important;
   opacity: 1 !important;
 }
 
-.dark-theme-override .border-slate-100:not(.services-light-section *),
-.dark-theme-override .border-slate-200:not(.services-light-section *),
-.dark-theme-override .border-slate-300:not(.services-light-section *),
-.dark-theme-override .border-slate-200\/50:not(.services-light-section *),
-.dark-theme-override .border-slate-200\/40:not(.services-light-section *),
-.dark-theme-override .border-slate-200\/60:not(.services-light-section *),
-.dark-theme-override .border:not(.services-light-section *) {
+.dark-theme-override .border-slate-100:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .border-slate-200:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .border-slate-300:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .border-slate-200\/50:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .border-slate-200\/40:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .border-slate-200\/60:not(.services-light-section *):not(.force-light-section *),
+.dark-theme-override .border:not(.services-light-section *):not(.force-light-section *) {
   border-color: var(--app-border) !important;
 }
 
-.dark-theme-override .bg-white:not(.services-light-section *),
-.dark-theme-override .bg-\[\#FAF8F5\]:not(.services-light-section *),
-.dark-theme-override .bg-\[\#F7F4EE\]:not(.services-light-section *),
-.dark-theme-override .bg-slate-50:not(.services-light-section *),
-.dark-theme-override .bg-\[\#F8FAFC\]:not(.services-light-section *),
-.dark-theme-override .bg-\[\#F5F7F4\]:not(.services-light-section *) {
+.dark-theme-override .bg-white:not(.services-light-section *):not(.force-light-section *):not(.force-light-section),
+.dark-theme-override .bg-\[\#FAF8F5\]:not(.services-light-section *):not(.force-light-section *):not(.force-light-section),
+.dark-theme-override .bg-\[\#F7F4EE\]:not(.services-light-section *):not(.force-light-section *):not(.force-light-section),
+.dark-theme-override .bg-slate-50:not(.services-light-section *):not(.force-light-section *):not(.force-light-section),
+.dark-theme-override .bg-\[\#F8FAFC\]:not(.services-light-section *):not(.force-light-section *):not(.force-light-section),
+.dark-theme-override .bg-\[\#F5F7F4\]:not(.services-light-section *):not(.force-light-section *):not(.force-light-section) {
   background-color: var(--app-card) !important;
 }
 
