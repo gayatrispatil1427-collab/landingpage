@@ -7,7 +7,7 @@ import {
   Quote, Maximize2, X, Send, Award, Calendar, Landmark, Coins,
   TrendingUp, Sparkles, AlertCircle, Play, ChevronRight, Users,
   Percent, FileText, Check, Shield, Zap, Target, BookOpen, MapPin, Phone, Mail,
-  Clock
+  Clock, Share2
 } from 'lucide-react';
 import Counter from '../components/Counter';
 import CardSlider from '../components/CardSlider';
@@ -27,6 +27,71 @@ export default function Home({ onOpenModal }) {
   const [checkupStep, setCheckupStep] = useState(1);
   const [checkupSubmitted, setCheckupSubmitted] = useState(false);
   const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
+
+  const [toastMessage, setToastMessage] = useState('');
+
+  const showToast = (msg) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage('');
+    }, 3000);
+  };
+
+  const handleShare = async (e, item, type = 'service') => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const hash = encodeURIComponent(item.title.replace(/\s+/g, '-').toLowerCase());
+    const shareUrl = `${window.location.origin}/${type === 'blog' ? 'blog' : 'services'}#${hash}`;
+    const shareText = `Check out ${item.title}: ${item.desc || ''}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: item.title,
+          text: shareText,
+          url: shareUrl
+        });
+        showToast('Shared successfully!');
+        return;
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.error('Error sharing:', err);
+        } else {
+          return;
+        }
+      }
+    }
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        showToast('Link copied to clipboard!');
+      } else {
+        throw new Error('Clipboard API not available');
+      }
+    } catch (err) {
+      try {
+        const textArea = document.createElement('textarea');
+        textArea.value = shareUrl;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        if (successful) {
+          showToast('Link copied to clipboard!');
+        } else {
+          throw new Error('execCommand copy failed');
+        }
+      } catch (fallbackErr) {
+        console.error('Fallback copy failed:', fallbackErr);
+        window.prompt('Copy link to share:', shareUrl);
+      }
+    }
+  };
 
   // SIP Calculator State
   const [sipAmount, setSipAmount] = useState(10000);
@@ -83,18 +148,24 @@ export default function Home({ onOpenModal }) {
       role: "VP, Tech Mahindra",
       text: "Rahul has been managing our family portfolio for 10+ years. His responsiveness during a medical claim last year was outstanding. He coordinated everything directly with the hospital.",
       rating: 5,
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120&h=120",
+      youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     {
       name: "Dr. Ananya Joshi",
       role: "Pediatrician",
       text: "Highly professional advice. Rahul helped us set up our daughter's educational fund when she was born. We now have complete clarity and a secure path for her foreign studies.",
       rating: 5,
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120&h=120",
+      youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     {
       name: "Mr. Rajesh Khanna",
       role: "Owner, Khanna Logistics",
       text: "Separating insurance from investments was a game-changer. Rahul guided me out of expensive endowment plans into clean term cover and diversified SIPs. Highly recommended!",
       rating: 5,
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120&h=120",
+      youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }
   ];
 
@@ -158,9 +229,9 @@ export default function Home({ onOpenModal }) {
 
   const services = [
     {
-      icon: ShieldCheck,
-      title: "Life Insurance Planning",
-      desc: "Pure term covers review, liability buffers, and income-replacement trusts to safeguard child standard of living."
+      icon: Target,
+      title: "Customised Planning",
+      desc: "Tailored wealth strategies and asset allocations aligned with your unique family milestones and risk profiles."
     },
     {
       icon: Heart,
@@ -220,9 +291,19 @@ export default function Home({ onOpenModal }) {
             {service.desc}
           </p>
         </div>
-        <Link to="/services" className="text-xs font-bold text-primary group-hover:translate-x-1.5 transition-transform inline-flex items-center gap-1 mt-6 uppercase">
-          Explore <ChevronRight className="h-3 w-3" />
-        </Link>
+        <div className="flex items-center justify-between w-full mt-6">
+          <button 
+            type="button"
+            onClick={(e) => handleShare(e, service, 'services')}
+            className="text-xs font-bold text-slate-550 hover:text-primary inline-flex items-center gap-1.5 uppercase cursor-pointer"
+          >
+            <Share2 className="h-3.5 w-3.5" />
+            Share
+          </button>
+          <Link to="/services" className="text-xs font-bold text-primary group-hover:translate-x-1.5 transition-transform inline-flex items-center gap-1 uppercase">
+            Explore <ChevronRight className="h-3 w-3" />
+          </Link>
+        </div>
       </div>
     );
   };
@@ -603,11 +684,11 @@ export default function Home({ onOpenModal }) {
             <div className="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
               <h3 className="font-serif text-xl font-bold text-slate-800 mb-6">Professional Journey</h3>
 
-              <div className="space-y-6 relative before:absolute before:left-3.5 before:top-2 before:bottom-2 before:w-[1px] before:bg-slate-200">
-                {/* 2011 */}
+              <div className="space-y-6 relative before:absolute before:left-6 before:top-2 before:bottom-2 before:w-[1px] before:bg-slate-200">
+                {/* 2022 */}
                 <div className="flex gap-6 relative items-start">
-                  <div className="h-7 w-7 rounded-full bg-primary text-white font-mono text-[10px] font-bold flex items-center justify-center shrink-0 shadow-md">
-                    11
+                  <div className="h-7 w-12 rounded-full bg-primary text-white font-mono text-[10px] font-bold flex items-center justify-center shrink-0 shadow-md">
+                    2022
                   </div>
                   <div>
                     <h4 className="font-serif text-sm font-bold text-slate-800">Financial Journey Starts</h4>
@@ -615,10 +696,10 @@ export default function Home({ onOpenModal }) {
                   </div>
                 </div>
 
-                {/* 2015 */}
+                {/* 2019 */}
                 <div className="flex gap-6 relative items-start">
-                  <div className="h-7 w-7 rounded-full bg-primary text-white font-mono text-[10px] font-bold flex items-center justify-center shrink-0 shadow-md">
-                    15
+                  <div className="h-7 w-12 rounded-full bg-primary text-white font-mono text-[10px] font-bold flex items-center justify-center shrink-0 shadow-md">
+                    2019
                   </div>
                   <div>
                     <h4 className="font-serif text-sm font-bold text-slate-800">MDRT USA Recognition</h4>
@@ -626,14 +707,14 @@ export default function Home({ onOpenModal }) {
                   </div>
                 </div>
 
-                {/* 2025 */}
+                {/* 2015 */}
                 <div className="flex gap-6 relative items-start">
-                  <div className="h-7 w-7 rounded-full bg-gold-500 text-white font-mono text-[10px] font-bold flex items-center justify-center shrink-0 shadow-md">
-                    25
+                  <div className="h-7 w-12 rounded-full bg-gold-500 text-white font-mono text-[10px] font-bold flex items-center justify-center shrink-0 shadow-md">
+                    2015
                   </div>
                   <div>
-                    <h4 className="font-serif text-sm font-bold text-slate-800">Chairman's Club Member</h4>
-                    <p className="text-[11px] text-slate-500 mt-1">Achieved peak LIC advisory status with over 1,000 active families secured.</p>
+                    <h4 className="font-serif text-sm font-bold text-slate-800">Youngest LIC Galaxy Club Member</h4>
+                    <p className="text-[11px] text-slate-500 mt-1">Achieved elite status as the youngest member in the region, managing complex wealth portfolios.</p>
                   </div>
                 </div>
               </div>
@@ -880,6 +961,16 @@ export default function Home({ onOpenModal }) {
                   </div>
                 </div>
               </div>
+
+              <div className="pt-6">
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary hover:bg-[#6D28D9] px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-all cursor-pointer"
+                >
+                  Explore Qualifications
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
 
           </div>
@@ -1097,7 +1188,7 @@ export default function Home({ onOpenModal }) {
             className="grid grid-cols-1 md:grid-cols-5 gap-6"
           >
 
-            {/* Card 1: Personalized Planning */}
+            {/* Card 1: Customised Planning */}
             <motion.div
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
@@ -1111,8 +1202,8 @@ export default function Home({ onOpenModal }) {
               >
                 <Target className="h-5 w-5" />
               </motion.div>
-              <h3 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-2">Personalized Planning</h3>
-              <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed">No generic templates. Every ratio is mapped to your specific milestones.</p>
+              <h3 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-2">Customised Planning</h3>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed">Tailored wealth strategies aligned with your unique family milestones and risk profiles.</p>
             </motion.div>
 
             {/* Card 2: Trusted Guidance */}
@@ -1318,23 +1409,47 @@ export default function Home({ onOpenModal }) {
                 transition={{ duration: 0.4 }}
                 className="space-y-6"
               >
-                <div className="flex gap-1">
-                  {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                    <Star key={i} className="h-4.5 w-4.5 fill-current text-gold-500" />
-                  ))}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex gap-1">
+                    {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
+                      <Star key={i} className="h-4.5 w-4.5 fill-current text-gold-500" />
+                    ))}
+                  </div>
+
+                  {testimonials[activeTestimonial].youtubeLink && (
+                    <a
+                      href={testimonials[activeTestimonial].youtubeLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50 hover:bg-red-100 dark:bg-red-950/20 dark:hover:bg-red-950/40 text-red-600 dark:text-red-400 text-xs font-bold transition-all shadow-sm border border-red-200/20 dark:border-red-900/30 cursor-pointer self-start sm:self-auto"
+                    >
+                      <svg className="h-4.5 w-4.5 fill-current text-red-600 dark:text-red-400" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.387.507A3.003 3.003 0 0 0 .502 6.163C0 8.07 0 12 0 12s0 3.93.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.507 9.387.507 9.387.507s7.517 0 9.387-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.93 24 12 24 12s0-3.93-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                      </svg>
+                      <span>Watch Success Story</span>
+                    </a>
+                  )}
                 </div>
 
-                <p className="font-serif text-base md:text-lg italic text-slate-750 text-slate-700 leading-relaxed">
+                <p className="font-serif text-base md:text-lg italic text-slate-700 dark:text-slate-200 leading-relaxed">
                   "{testimonials[activeTestimonial].text}"
                 </p>
 
-                <div className="pt-6 border-t border-slate-200/50">
-                  <span className="block font-serif text-base font-bold text-primary">
-                    {testimonials[activeTestimonial].name}
-                  </span>
-                  <span className="block text-xs text-slate-400 font-semibold mt-0.5">
-                    {testimonials[activeTestimonial].role}
-                  </span>
+                <div className="pt-6 border-t border-slate-200/50 dark:border-slate-700/50 flex items-center gap-4">
+                  <img
+                    src={testimonials[activeTestimonial].image}
+                    alt={testimonials[activeTestimonial].name}
+                    className="w-12 h-12 rounded-full object-cover border-2 border-primary/20 shadow-md shrink-0"
+                    loading="lazy"
+                  />
+                  <div>
+                    <span className="block font-serif text-base font-bold text-primary dark:text-blue-400">
+                      {testimonials[activeTestimonial].name}
+                    </span>
+                    <span className="block text-xs text-slate-400 font-semibold mt-0.5">
+                      {testimonials[activeTestimonial].role}
+                    </span>
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -1731,6 +1846,21 @@ export default function Home({ onOpenModal }) {
           </div>
         </div>
       </section>
+
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-lg border border-slate-800 text-xs font-semibold flex items-center gap-2"
+          >
+            <CheckCircle className="h-4 w-4 text-emerald-500" />
+            {toastMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </motion.div>
   );

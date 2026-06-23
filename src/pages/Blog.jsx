@@ -1,11 +1,75 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, User, ArrowRight, BookOpen, ArrowLeft } from 'lucide-react';
+import { Search, User, ArrowRight, BookOpen, ArrowLeft, Share2, CheckCircle } from 'lucide-react';
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [toastMessage, setToastMessage] = useState('');
+
+  const showToast = (msg) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage('');
+    }, 3000);
+  };
+
+  const handleShare = async (e, item, type = 'blog') => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const hash = encodeURIComponent(item.title.replace(/\s+/g, '-').toLowerCase());
+    const shareUrl = `${window.location.origin}/${type === 'blog' ? 'blog' : 'services'}#${hash}`;
+    const shareText = `Check out ${item.title}: ${item.desc || ''}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: item.title,
+          text: shareText,
+          url: shareUrl
+        });
+        showToast('Shared successfully!');
+        return;
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.error('Error sharing:', err);
+        } else {
+          return;
+        }
+      }
+    }
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        showToast('Link copied to clipboard!');
+      } else {
+        throw new Error('Clipboard API not available');
+      }
+    } catch (err) {
+      try {
+        const textArea = document.createElement('textarea');
+        textArea.value = shareUrl;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        if (successful) {
+          showToast('Link copied to clipboard!');
+        } else {
+          throw new Error('execCommand copy failed');
+        }
+      } catch (fallbackErr) {
+        console.error('Fallback copy failed:', fallbackErr);
+        window.prompt('Copy link to share:', shareUrl);
+      }
+    }
+  };
 
   const categories = ['All', 'Insurance', 'Investments', 'Retirement', 'Tax Planning', 'Family Finance'];
 
@@ -197,10 +261,20 @@ export default function Blog() {
                   </div>
                 </div>
 
-                <a href="#" className="flex items-center gap-1.5 text-xs font-bold text-primary hover:underline uppercase">
-                  Read Article
-                  <ArrowRight className="h-4 w-4" />
-                </a>
+                <div className="flex items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={(e) => handleShare(e, featuredPost, 'blog')}
+                    className="flex items-center gap-1.5 text-xs font-bold text-slate-550 hover:text-primary uppercase cursor-pointer"
+                  >
+                    <Share2 className="h-4 w-4" />
+                    Share
+                  </button>
+                  <a href="#" className="flex items-center gap-1.5 text-xs font-bold text-primary hover:underline uppercase">
+                    Read Article
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -258,10 +332,20 @@ export default function Blog() {
                       <User className="h-3.5 w-3.5 text-primary" />
                       <span className="text-[10px] text-slate-600 font-semibold">{post.author}</span>
                     </div>
-                    <a href="#" className="flex items-center gap-1 text-[10px] font-bold text-primary hover:underline uppercase">
-                      Read Details
-                      <ArrowRight className="h-3 w-3" />
-                    </a>
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={(e) => handleShare(e, post, 'blog')}
+                        className="flex items-center gap-1 text-[10px] font-bold text-slate-550 hover:text-primary uppercase cursor-pointer"
+                      >
+                        <Share2 className="h-3.5 w-3.5" />
+                        Share
+                      </button>
+                      <a href="#" className="flex items-center gap-1 text-[10px] font-bold text-primary hover:underline uppercase">
+                        Read Details
+                        <ArrowRight className="h-3 w-3" />
+                      </a>
+                    </div>
                   </div>
                 </motion.article>
               ))}
@@ -276,6 +360,22 @@ export default function Blog() {
         </AnimatePresence>
 
       </div>
+
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-lg border border-slate-800 text-xs font-semibold flex items-center gap-2"
+          >
+            <CheckCircle className="h-4 w-4 text-emerald-500" />
+            {toastMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 }

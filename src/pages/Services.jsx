@@ -1,9 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ShieldCheck, HeartPulse, Sunset, GraduationCap, TrendingUp, PiggyBank, Target, Briefcase, ChevronRight, HelpCircle, ArrowLeft } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ShieldCheck, HeartPulse, Sunset, GraduationCap, TrendingUp, PiggyBank, Target, Briefcase, ChevronRight, HelpCircle, ArrowLeft, Share2, CheckCircle } from 'lucide-react';
 
 export default function Services({ onOpenModal }) {
+  const [toastMessage, setToastMessage] = useState('');
+
+  const showToast = (msg) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage('');
+    }, 3000);
+  };
+
+  const handleShare = async (e, item, type = 'service') => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const hash = encodeURIComponent(item.title.replace(/\s+/g, '-').toLowerCase());
+    const shareUrl = `${window.location.origin}/${type === 'blog' ? 'blog' : 'services'}#${hash}`;
+    const shareText = `Check out ${item.title}: ${item.desc || ''}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: item.title,
+          text: shareText,
+          url: shareUrl
+        });
+        showToast('Shared successfully!');
+        return;
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.error('Error sharing:', err);
+        } else {
+          return;
+        }
+      }
+    }
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        showToast('Link copied to clipboard!');
+      } else {
+        throw new Error('Clipboard API not available');
+      }
+    } catch (err) {
+      try {
+        const textArea = document.createElement('textarea');
+        textArea.value = shareUrl;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        if (successful) {
+          showToast('Link copied to clipboard!');
+        } else {
+          throw new Error('execCommand copy failed');
+        }
+      } catch (fallbackErr) {
+        console.error('Fallback copy failed:', fallbackErr);
+        window.prompt('Copy link to share:', shareUrl);
+      }
+    }
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -24,11 +89,11 @@ export default function Services({ onOpenModal }) {
   const servicesData = [
     {
       id: 1,
-      title: "Life Insurance Planning",
-      icon: ShieldCheck,
-      tag: "Protection",
-      desc: "Secure your family's future with customized term life insurance coverage matching your exact liability and earning profile.",
-      benefits: ["High Cover Term Policies", "Whole Life Protection Plans", "Keyman Insurance for Businesses"]
+      title: "Customised Planning",
+      icon: Target,
+      tag: "Strategy",
+      desc: "Develop tailored wealth strategies and asset allocations aligned with your unique family milestones and risk profiles.",
+      benefits: ["Goal-based Asset Mapping", "Personalized Risk Assessments", "Milestone-linked Portfolio Design"]
     },
     {
       id: 2,
@@ -135,7 +200,7 @@ export default function Services({ onOpenModal }) {
                 className="group relative flex flex-col justify-between overflow-hidden rounded-2xl p-6 glass-card border border-slate-100 transition-all duration-300 hover:border-primary/30 hover:shadow-[0_15px_35px_rgba(11,94,215,0.06)] hover:-translate-y-2"
               >
                 {/* Background glow overlay */}
-                <div className="absolute -inset-px bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -inset-px bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 
                 <div>
                   {/* Icon & Category Tag */}
@@ -169,12 +234,22 @@ export default function Services({ onOpenModal }) {
                 </div>
 
                 {/* Card Action Link */}
-                <button
-                  onClick={onOpenModal}
-                  className="mt-4 flex w-full cursor-pointer items-center justify-center gap-1 rounded-lg border border-primary/25 bg-transparent py-2.5 text-xs font-semibold text-primary transition-all hover:bg-primary hover:text-white"
-                >
-                  Schedule Advisory
-                </button>
+                <div className="mt-4 flex gap-2 w-full">
+                  <button
+                    type="button"
+                    onClick={(e) => handleShare(e, svc, 'services')}
+                    className="flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-850 hover:border-primary/30 bg-transparent px-3 py-2.5 text-xs font-semibold text-slate-500 hover:text-primary transition-all cursor-pointer"
+                    title="Share Service"
+                  >
+                    <Share2 className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={onOpenModal}
+                    className="flex-1 flex cursor-pointer items-center justify-center gap-1 rounded-lg border border-primary/25 bg-transparent py-2.5 text-xs font-semibold text-primary transition-all hover:bg-primary hover:text-white"
+                  >
+                    Schedule Advisory
+                  </button>
+                </div>
               </motion.div>
             );
           })}
@@ -210,6 +285,22 @@ export default function Services({ onOpenModal }) {
         </div>
 
       </div>
+
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-lg border border-slate-800 text-xs font-semibold flex items-center gap-2"
+          >
+            <CheckCircle className="h-4 w-4 text-emerald-500" />
+            {toastMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </motion.div>
   );
 }

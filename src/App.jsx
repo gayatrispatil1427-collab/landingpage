@@ -22,7 +22,7 @@ function AnimatedRoutes({ onOpenModal }) {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home onOpenModal={onOpenModal} />} />
         <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
+        <Route path="/services" element={<Services onOpenModal={onOpenModal} />} />
         <Route path="/checkup" element={<FinancialCheckup />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
