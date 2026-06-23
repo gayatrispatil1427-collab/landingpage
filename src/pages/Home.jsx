@@ -206,9 +206,9 @@ export default function Home({ onOpenModal }) {
     const isCustomIcon = typeof service.icon === 'string';
 
     return (
-      <div className={`w-80 md:w-96 h-[260px] bg-white p-8 rounded-3xl border flex flex-col justify-between group hover:border-primary/30 transition-all shadow-sm ${
-        service.isGold ? 'border-gold-500/25' : 'border-slate-100'
-      } ${service.isPremium ? 'bg-primary/5' : ''}`}>
+      <div className={`w-80 md:w-96 h-[260px] bg-white dark:bg-slate-800 p-8 rounded-3xl border flex flex-col justify-between group hover:border-primary/30 transition-all shadow-sm ${
+        service.isGold ? 'border-gold-500/25 dark:border-gold-500/40' : 'border-slate-100 dark:border-slate-700/50'
+      } ${service.isPremium ? 'bg-primary/5 dark:bg-primary/10' : ''}`}>
         <div>
           <div className={`h-10 w-10 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform mb-6 font-bold text-xs ${
             service.isGold 
@@ -217,8 +217,8 @@ export default function Home({ onOpenModal }) {
           }`}>
             {isCustomIcon ? service.icon : <IconComponent className="h-5 w-5" />}
           </div>
-          <h3 className="font-serif text-lg font-bold text-[#111827] mb-2">{service.title}</h3>
-          <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
+          <h3 className="font-serif text-lg font-bold text-[#111827] dark:text-white mb-2">{service.title}</h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3">
             {service.desc}
           </p>
         </div>
@@ -357,8 +357,8 @@ export default function Home({ onOpenModal }) {
         </div>
 
         <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-16 xl:px-24 w-full relative z-10 py-12 sm:py-16 lg:py-0 order-1 lg:order-none">
-          {/* Content container — hero-light-section pins text to dark regardless of dark mode */}
-          <div className="hero-light-section force-light-section w-full lg:w-[55%]">
+          {/* Content container */}
+          <div className="w-full lg:w-[55%]">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -526,7 +526,7 @@ export default function Home({ onOpenModal }) {
 
 
       {/* 3. ABOUT RAHUL KULKARNI (Storytelling layout & timeline) */}
-      <section className="py-24 bg-[#FAF8F5] force-light-section">
+      <section className="py-24 bg-[#FAF8F5]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -537,7 +537,7 @@ export default function Home({ onOpenModal }) {
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-800 leading-tight">
                 Crafting roadmaps to <span className="text-primary">Financial Freedom</span>
               </h2>
-              <p className="text-xs text-slate-500 leading-relaxed">
+              <p className="text-xs text-slate-550 text-slate-500 leading-relaxed">
                 Rahul Kulkarni has spent the last 15+ years restructuring policy portfolios to remove high-cost products and replace them with clear safety-first solutions. Our advisory works to protect family livelihoods above index speculation.
               </p>
 
@@ -554,17 +554,17 @@ export default function Home({ onOpenModal }) {
                   variants={missionVariants}
                   whileHover={{ y: -6, scale: 1.03, boxShadow: "0 15px 30px -10px rgba(37, 99, 235, 0.15), 0 0 0 1px rgba(37, 99, 235, 0.45)" }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="p-5 rounded-xl bg-white border border-slate-100 shadow-sm cursor-pointer transition-colors duration-300 hover:border-primary/50"
+                  className="p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer transition-colors duration-300 hover:border-primary/50"
                 >
                   <motion.div 
                     animate={{ y: [0, -4, 0] }}
                     transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0 }}
-                    className="h-8 w-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-3 shadow-inner"
+                    className="h-8 w-8 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-3 shadow-inner"
                   >
                     <Target className="h-4.5 w-4.5" />
                   </motion.div>
-                  <h4 className="font-serif text-sm font-bold text-slate-800 mb-1">Mission</h4>
-                  <p className="text-[10px] text-slate-500 leading-relaxed">To replace financial anxiety with security.</p>
+                  <h4 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-1">Mission</h4>
+                  <p className="text-[10px] text-slate-550 dark:text-slate-400 leading-relaxed">To replace financial anxiety with security.</p>
                 </motion.div>
 
                 {/* Vision Card */}
@@ -572,17 +572,17 @@ export default function Home({ onOpenModal }) {
                   variants={visionVariants}
                   whileHover={{ y: -6, scale: 1.03, boxShadow: "0 15px 30px -10px rgba(37, 99, 235, 0.15), 0 0 0 1px rgba(37, 99, 235, 0.45)" }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="p-5 rounded-xl bg-white border border-slate-100 shadow-sm cursor-pointer transition-colors duration-300 hover:border-primary/50"
+                  className="p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer transition-colors duration-300 hover:border-primary/50"
                 >
                   <motion.div 
                     animate={{ y: [0, -4, 0] }}
                     transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 }}
-                    className="h-8 w-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-3 shadow-inner"
+                    className="h-8 w-8 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-3 shadow-inner"
                   >
                     <Sparkles className="h-4.5 w-4.5" />
                   </motion.div>
-                  <h4 className="font-serif text-sm font-bold text-slate-800 mb-1">Vision</h4>
-                  <p className="text-[10px] text-slate-500 leading-relaxed">Secure 5,000 families with stable lifetime income.</p>
+                  <h4 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-1">Vision</h4>
+                  <p className="text-[10px] text-slate-550 dark:text-slate-400 leading-relaxed">Secure 5,000 families with stable lifetime income.</p>
                 </motion.div>
 
                 {/* Values Card */}
@@ -590,17 +590,17 @@ export default function Home({ onOpenModal }) {
                   variants={valuesVariants}
                   whileHover={{ y: -6, scale: 1.03, boxShadow: "0 15px 30px -10px rgba(37, 99, 235, 0.15), 0 0 0 1px rgba(37, 99, 235, 0.45)" }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="p-5 rounded-xl bg-white border border-slate-100 shadow-sm cursor-pointer transition-colors duration-300 hover:border-primary/50"
+                  className="p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer transition-colors duration-300 hover:border-primary/50"
                 >
                   <motion.div 
                     animate={{ y: [0, -4, 0] }}
                     transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1.0 }}
-                    className="h-8 w-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-3 shadow-inner"
+                    className="h-8 w-8 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-3 shadow-inner"
                   >
                     <ShieldCheck className="h-4.5 w-4.5" />
                   </motion.div>
-                  <h4 className="font-serif text-sm font-bold text-slate-800 mb-1">Values</h4>
-                  <p className="text-[10px] text-slate-500 leading-relaxed">Absolute transparency in client advisory.</p>
+                  <h4 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-1">Values</h4>
+                  <p className="text-[10px] text-slate-550 dark:text-slate-400 leading-relaxed">Absolute transparency in client advisory.</p>
                 </motion.div>
               </motion.div>
             </div>
@@ -775,7 +775,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 5. SERVICES (Premium Bento Grid Layout) */}
-      <section className="py-24 bg-[#FAF8F5] border-y border-slate-200/40 services-light-section">
+      <section className="py-24 bg-[#FAF8F5] border-y border-slate-200/40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Advisory Avenues</span>
@@ -893,7 +893,7 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 8. FINANCIAL JOURNEY ROADMAP (Interactive timeline) */}
-      <section className="py-24 bg-[#FAF8F5] border-b border-slate-200/30 force-light-section">
+      <section className="py-24 bg-[#FAF8F5] border-b border-slate-200/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Methodology</span>
@@ -1029,7 +1029,7 @@ export default function Home({ onOpenModal }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 150, damping: 20 }}
-              className="max-w-3xl mx-auto bg-white rounded-3xl p-8 border border-slate-100 shadow-sm flex flex-col md:flex-row gap-8 items-start relative overflow-hidden"
+              className="max-w-3xl mx-auto bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-100 dark:border-slate-700/50 shadow-sm flex flex-col md:flex-row gap-8 items-start relative overflow-hidden"
             >
               {/* Background accent highlight element */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
@@ -1038,7 +1038,7 @@ export default function Home({ onOpenModal }) {
                 initial={{ scale: 0.7, rotate: -25, opacity: 0 }}
                 animate={{ scale: 1, rotate: 0, opacity: 1 }}
                 transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.05 }}
-                className="h-16 w-16 rounded-full bg-primary/10 text-primary flex items-center justify-center font-serif text-2xl font-bold shrink-0 shadow-inner"
+                className="h-16 w-16 rounded-full bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center font-serif text-2xl font-bold shrink-0 shadow-inner"
               >
                 {journeySteps[activeJourneyStep].step}
               </motion.div>
@@ -1060,7 +1060,7 @@ export default function Home({ onOpenModal }) {
                     hidden: { opacity: 0, x: 20 },
                     visible: { opacity: 1, x: 0 }
                   }}
-                  className="font-serif text-lg font-bold text-slate-800"
+                  className="font-serif text-lg font-bold text-slate-800 dark:text-white"
                 >
                   {journeySteps[activeJourneyStep].title}
                 </motion.h4>
@@ -1078,22 +1078,23 @@ export default function Home({ onOpenModal }) {
                     hidden: { opacity: 0, y: 10 },
                     visible: { opacity: 1, y: 0 }
                   }}
-                  className="text-xs text-slate-500 leading-relaxed"
+                  className="text-xs text-slate-550 dark:text-slate-400 leading-relaxed"
                 >
                   {journeySteps[activeJourneyStep].detail}
                 </motion.p>
               </motion.div>
             </motion.div>
           </AnimatePresence>
+
         </div>
       </section>
 
       {/* 9. WHY CHOOSE RAHUL KULKARNI (Premium animated cards) */}
-      <section className="py-24 bg-white force-light-section transition-colors duration-300">
+      <section className="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Why Us</span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-800 mt-2">
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-800 dark:text-white mt-2">
               The Five pillars of trust
             </h2>
             <div className="mx-auto mt-4 h-1 w-20 bg-primary rounded-full" />
@@ -1112,17 +1113,17 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-[#FAF8F5] border border-slate-100 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div 
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0 }}
-                className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 shadow-inner"
+                className="h-10 w-10 rounded-xl bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-4 shadow-inner"
               >
                 <Target className="h-5 w-5" />
               </motion.div>
-              <h3 className="font-serif text-sm font-bold text-slate-800 mb-2">Personalized Planning</h3>
-              <p className="text-[10px] text-slate-500 leading-relaxed">No generic templates. Every ratio is mapped to your specific milestones.</p>
+              <h3 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-2">Personalized Planning</h3>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed">No generic templates. Every ratio is mapped to your specific milestones.</p>
             </motion.div>
 
             {/* Card 2: Trusted Guidance */}
@@ -1130,17 +1131,17 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-[#FAF8F5] border border-slate-100 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div 
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.45 }}
-                className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 shadow-inner"
+                className="h-10 w-10 rounded-xl bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-4 shadow-inner"
               >
                 <Users className="h-5 w-5" />
               </motion.div>
-              <h3 className="font-serif text-sm font-bold text-slate-800 mb-2">Trusted Guidance</h3>
-              <p className="text-[10px] text-slate-500 leading-relaxed">15+ years navigating claims, tax transitions, and market cycles.</p>
+              <h3 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-2">Trusted Guidance</h3>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed">15+ years navigating claims, tax transitions, and market cycles.</p>
             </motion.div>
 
             {/* Card 3: Transparent Advice */}
@@ -1148,17 +1149,17 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-[#FAF8F5] border border-slate-100 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div 
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.9 }}
-                className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 shadow-inner"
+                className="h-10 w-10 rounded-xl bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-4 shadow-inner"
               >
                 <ShieldCheck className="h-5 w-5" />
               </motion.div>
-              <h3 className="font-serif text-sm font-bold text-slate-800 mb-2">Transparent Advice</h3>
-              <p className="text-[10px] text-slate-500 leading-relaxed">Clear commissions disclosure. We reject toxic endowment policies.</p>
+              <h3 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-2">Transparent Advice</h3>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed">Clear commissions disclosure. We reject toxic endowment policies.</p>
             </motion.div>
 
             {/* Card 4: Long-Term Support */}
@@ -1166,17 +1167,17 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-[#FAF8F5] border border-slate-100 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div 
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1.35 }}
-                className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 shadow-inner"
+                className="h-10 w-10 rounded-xl bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-4 shadow-inner"
               >
                 <Zap className="h-5 w-5" />
               </motion.div>
-              <h3 className="font-serif text-sm font-bold text-slate-800 mb-2">Long-Term Support</h3>
-              <p className="text-[10px] text-slate-500 leading-relaxed">Dedicated claims coordination hotline operating 24/7 during emergencies.</p>
+              <h3 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-2">Long-Term Support</h3>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed">Dedicated claims coordination hotline operating 24/7 during emergencies.</p>
             </motion.div>
 
             {/* Card 5: Family-Centric Approach */}
@@ -1184,17 +1185,17 @@ export default function Home({ onOpenModal }) {
               variants={pillarsCardVariants}
               whileHover={{ y: -10, scale: 1.03, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-6 rounded-2xl bg-[#FAF8F5] border border-slate-100 shadow-sm cursor-pointer"
+              className="p-6 rounded-2xl bg-[#FAF8F5] dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer"
             >
               <motion.div 
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1.8 }}
-                className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 shadow-inner"
+                className="h-10 w-10 rounded-xl bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-4 shadow-inner"
               >
                 <Heart className="h-5 w-5" />
               </motion.div>
-              <h3 className="font-serif text-sm font-bold text-slate-800 mb-2">Family-Centric Approach</h3>
-              <p className="text-[10px] text-slate-500 leading-relaxed">We protect family livelihood first before index speculation structures.</p>
+              <h3 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-2">Family-Centric Approach</h3>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed">We protect family livelihood first before index speculation structures.</p>
             </motion.div>
 
           </motion.div>
