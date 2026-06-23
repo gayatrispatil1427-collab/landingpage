@@ -372,12 +372,12 @@ export default function Home({ onOpenModal }) {
               </div>
 
 
-              <h1 className="font-sans text-4xl sm:text-5xl lg:text-[54px] font-bold text-[#111827] leading-[1.15] tracking-tight">
+              <h1 className="font-sans text-4xl sm:text-5xl lg:text-[54px] font-bold text-[#111827] dark:text-white leading-[1.15] tracking-tight">
                 <span className="text-primary">Secure</span> Your Family's Future <br className="hidden sm:inline" />
                 With <span className="text-primary">Smart</span> Financial Planning
               </h1>
 
-              <p className="text-sm sm:text-base lg:text-lg text-[#374151] max-w-xl leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-[#374151] dark:text-slate-300 max-w-xl leading-relaxed">
                 Helping families protect wealth, build assets and achieve long-term financial security through expert financial planning.
               </p>
 
@@ -389,7 +389,7 @@ export default function Home({ onOpenModal }) {
                   onClick={() => { setActiveBtn(1); onOpenModal(); }}
                   className={`rounded-lg px-8 py-4 text-xs font-bold tracking-wider uppercase shadow-lg transition-all duration-300 cursor-pointer ${activeBtn === 1
                       ? 'bg-primary text-white shadow-primary/20 border border-primary'
-                      : 'bg-white/80 text-primary border border-slate-200 shadow-sm hover:bg-primary hover:text-white hover:border-primary hover:shadow-primary/20'
+                      : 'bg-white/80 dark:bg-slate-800/80 text-primary dark:text-white border border-slate-200 dark:border-slate-700/50 shadow-sm hover:bg-primary hover:text-white hover:border-primary hover:shadow-primary/20'
                     }`}
                 >
                   Book Free Consultation
@@ -401,7 +401,7 @@ export default function Home({ onOpenModal }) {
                   onClick={() => setActiveBtn(2)}
                   className={`rounded-lg px-8 py-4 text-xs font-bold tracking-wider uppercase flex items-center justify-center shadow-sm cursor-pointer transition-all duration-300 ${activeBtn === 2
                       ? 'bg-primary text-white border border-primary shadow-lg shadow-primary/20'
-                      : 'bg-white/80 text-primary border border-slate-200 hover:bg-primary hover:text-white hover:border-primary hover:shadow-lg hover:shadow-primary/20'
+                      : 'bg-white/80 dark:bg-slate-800/80 text-primary dark:text-white border border-slate-200 dark:border-slate-700/50 hover:bg-primary hover:text-white hover:border-primary hover:shadow-lg hover:shadow-primary/20'
                     }`}
                 >
                   Financial Health Checkup
@@ -411,24 +411,24 @@ export default function Home({ onOpenModal }) {
               {/* Badges with individual icons and stacked text */}
               <div className="grid grid-cols-3 gap-2 sm:gap-x-8 sm:gap-y-4 pt-6 border-t border-slate-300/40 max-w-xl">
                 <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-3">
-                  <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-[#111827] shrink-0" />
+                  <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-[#111827] dark:text-slate-200 shrink-0" />
                   <div className="flex flex-col">
-                    <span className="font-bold text-xs sm:text-sm text-[#111827] leading-none">15+ Years</span>
-                    <span className="text-[8px] sm:text-[10px] text-slate-500 uppercase tracking-wider font-semibold mt-1">Experience</span>
+                    <span className="font-bold text-xs sm:text-sm text-[#111827] dark:text-white leading-none">15+ Years</span>
+                    <span className="text-[8px] sm:text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold mt-1">Experience</span>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-3">
-                  <Users className="h-6 w-6 sm:h-8 sm:w-8 text-[#111827] shrink-0" />
+                  <Users className="h-6 w-6 sm:h-8 sm:w-8 text-[#111827] dark:text-slate-200 shrink-0" />
                   <div className="flex flex-col">
-                    <span className="font-bold text-xs sm:text-sm text-[#111827] leading-none">1,000+ Families</span>
-                    <span className="text-[8px] sm:text-[10px] text-slate-500 uppercase tracking-wider font-semibold mt-1">Protected</span>
+                    <span className="font-bold text-xs sm:text-sm text-[#111827] dark:text-white leading-none">1,000+ Families</span>
+                    <span className="text-[8px] sm:text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold mt-1">Protected</span>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-3">
-                  <Award className="h-6 w-6 sm:h-8 sm:w-8 text-[#111827] shrink-0" />
+                  <Award className="h-6 w-6 sm:h-8 sm:w-8 text-[#111827] dark:text-slate-200 shrink-0" />
                   <div className="flex flex-col">
-                    <span className="font-bold text-xs sm:text-sm text-[#111827] leading-none">MDRT</span>
-                    <span className="text-[8px] sm:text-[10px] text-slate-500 uppercase tracking-wider font-semibold mt-1">Qualified</span>
+                    <span className="font-bold text-xs sm:text-sm text-[#111827] dark:text-white leading-none">MDRT</span>
+                    <span className="text-[8px] sm:text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold mt-1">Qualified</span>
                   </div>
                 </div>
               </div>
