@@ -13,7 +13,6 @@ import ConsultationModal from './components/ConsultationModal';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import BackToTop from './components/BackToTop';
 import ScrollToTop from './components/ScrollToTop';
-import LoadingScreen from './components/LoadingScreen';
 import ScrollProgress from './components/ScrollProgress';
 
 function AnimatedRoutes({ onOpenModal }) {
@@ -63,9 +62,6 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      
-      {/* Premium Loader Screen */}
-      <LoadingScreen />
       
       {/* Scroll progress indicator */}
       <ScrollProgress />
