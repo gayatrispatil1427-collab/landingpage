@@ -1,0 +1,6 @@
+# Robots.txt file for Rahul Kulkarni Financial Planning Website
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://www.rahulkulkarni.com/sitemap.xml
