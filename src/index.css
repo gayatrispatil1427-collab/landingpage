@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@variant dark (&:where(.dark-theme-override, .dark-theme-override *));
-
 @theme {
   --color-primary: #2563EB;
   --color-secondary: #06B6D4;
@@ -77,48 +75,68 @@ body {
   color: var(--app-text) !important;
 }
 
-/* Force dark mode color standards */
-.dark-theme-override .text-slate-800,
-.dark-theme-override .text-slate-700,
-.dark-theme-override .text-slate-900,
-.dark-theme-override .text-slate-950,
-.dark-theme-override h1,
-.dark-theme-override h2,
-.dark-theme-override h3,
-.dark-theme-override h4,
-.dark-theme-override p,
-.dark-theme-override span:not(.text-primary):not(.text-secondary):not(.text-accent):not(.text-emerald-600):not(.text-red-500):not(.text-amber-600):not(.text-amber-500):not(.text-blue-600) {
+/* Force dark mode color standards — exempt .hero-light-section & .services-light-section */
+.dark-theme-override .text-slate-800:not(.services-light-section *),
+.dark-theme-override .text-slate-700:not(.services-light-section *),
+.dark-theme-override .text-slate-900:not(.services-light-section *),
+.dark-theme-override .text-slate-950:not(.services-light-section *),
+.dark-theme-override h1:not(.hero-light-section *):not(.services-light-section *),
+.dark-theme-override h2:not(.hero-light-section *):not(.services-light-section *),
+.dark-theme-override h3:not(.hero-light-section *):not(.services-light-section *),
+.dark-theme-override h4:not(.hero-light-section *):not(.services-light-section *),
+.dark-theme-override p:not(.hero-light-section *):not(.services-light-section *),
+.dark-theme-override span:not(.hero-light-section *):not(.services-light-section *):not(.text-primary):not(.text-secondary):not(.text-accent):not(.text-emerald-600):not(.text-red-500):not(.text-amber-600):not(.text-amber-500):not(.text-blue-600) {
   color: #F8FAFC !important;
   opacity: 1 !important;
 }
 
+/* Hero section always stays light — override dark mode back to dark text */
+.dark-theme-override .hero-light-section h1,
+.dark-theme-override .hero-light-section h2,
+.dark-theme-override .hero-light-section p,
+.dark-theme-override .hero-light-section span,
+.dark-theme-override .hero-light-section div {
+  color: #111827 !important;
+  opacity: 1 !important;
+}
+
+.dark-theme-override .hero-light-section .text-primary,
+.dark-theme-override .hero-light-section span.text-primary {
+  color: var(--color-primary) !important;
+}
+
+.dark-theme-override .hero-light-section section,
+.dark-theme-override .hero-light-section {
+  background-color: #DFE6DE !important;
+}
 
 
-.dark-theme-override .text-slate-655,
-.dark-theme-override .text-slate-550,
-.dark-theme-override .text-slate-600,
-.dark-theme-override .text-slate-500,
-.dark-theme-override .text-slate-400 {
+
+.dark-theme-override .text-slate-655:not(.services-light-section *),
+.dark-theme-override .text-slate-550:not(.services-light-section *),
+.dark-theme-override .text-slate-600:not(.services-light-section *),
+.dark-theme-override .text-slate-500:not(.services-light-section *),
+.dark-theme-override .text-slate-400:not(.services-light-section *) {
   color: #94A3B8 !important;
   opacity: 1 !important;
 }
 
-.dark-theme-override .border-slate-100,
-.dark-theme-override .border-slate-200,
-.dark-theme-override .border-slate-300,
-.dark-theme-override .border-slate-200\/50,
-.dark-theme-override .border-slate-200\/40,
-.dark-theme-override .border-slate-200\/60,
-.dark-theme-override .border {
+.dark-theme-override .border-slate-100:not(.services-light-section *),
+.dark-theme-override .border-slate-200:not(.services-light-section *),
+.dark-theme-override .border-slate-300:not(.services-light-section *),
+.dark-theme-override .border-slate-200\/50:not(.services-light-section *),
+.dark-theme-override .border-slate-200\/40:not(.services-light-section *),
+.dark-theme-override .border-slate-200\/60:not(.services-light-section *),
+.dark-theme-override .border:not(.services-light-section *) {
   border-color: var(--app-border) !important;
 }
 
-.dark-theme-override .bg-white,
-.dark-theme-override .bg-\[\#FAF8F5\],
-.dark-theme-override .bg-\[\#F7F4EE\],
-.dark-theme-override .bg-slate-50,
-.dark-theme-override .bg-\[\#F8FAFC\],
-.dark-theme-override .bg-\[\#F5F7F4\] {
+.dark-theme-override .bg-white:not(.services-light-section *),
+.dark-theme-override .bg-\[\#FAF8F5\]:not(.services-light-section *),
+.dark-theme-override .bg-\[\#F7F4EE\]:not(.services-light-section *),
+.dark-theme-override .bg-slate-50:not(.services-light-section *),
+.dark-theme-override .bg-\[\#F8FAFC\]:not(.services-light-section *),
+.dark-theme-override .bg-\[\#F5F7F4\]:not(.services-light-section *) {
   background-color: var(--app-card) !important;
 }
 
@@ -224,6 +242,7 @@ body {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -247,7 +266,8 @@ body {
 
 .ticker-card-wrapper {
   flex: 0 0 auto;
-  padding-right: 1.5rem; /* 24px gap between cards */
+  padding-right: 1.5rem;
+  /* 24px gap between cards */
   user-select: none;
   -webkit-user-drag: none;
 }
