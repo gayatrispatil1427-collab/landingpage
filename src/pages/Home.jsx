@@ -784,7 +784,9 @@ export default function Home({ onOpenModal }) {
             </h2>
             <div className="mx-auto mt-4 h-1 w-20 bg-primary rounded-full" />
           </div>
+        </div>
 
+        <div className="w-full overflow-hidden">
           <CardSlider
             items={services}
             renderItem={renderServiceCard}
