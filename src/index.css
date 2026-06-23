@@ -251,9 +251,6 @@ body {
   overflow: hidden;
   width: 100%;
   position: relative;
-  /* Premium horizontal fade-out gradient mask */
-  mask-image: linear-gradient(to right, transparent, white 8%, white 92%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, white 8%, white 92%, transparent);
 }
 
 .ticker-track {
