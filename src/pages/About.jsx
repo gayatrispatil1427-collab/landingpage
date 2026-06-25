@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Award, Briefcase, GraduationCap, Heart, Milestone, ShieldCheck, Target, Eye, ArrowLeft } from 'lucide-react';
+import { Heart, ArrowLeft, TrendingUp, Gauge, FileText, Users, Coins, Home, Activity, Award, GraduationCap, Building2, Monitor } from 'lucide-react';
 import Counter from '../components/Counter';
 import portraitImg from '../assets/rahul-portrait.jpeg';
-import awardImg from '../assets/rahul-award.jpeg';
+import rkVideo from '../assets/RK.mp4';
+import logoImg from '../assets/logo4.png';
 
 export default function About() {
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -24,39 +26,6 @@ export default function About() {
     }
   };
 
-  const timelineEvents = [
-    {
-      year: '2011',
-      title: 'The Inception',
-      desc: 'Began journey as an insurance consultant with a vision to make financial literacy accessible to every household.',
-      icon: Briefcase
-    },
-    {
-      year: '2015',
-      title: 'MDRT Qualification',
-      desc: 'Qualified for the prestigious Million Dollar Round Table (MDRT, USA) for the first time, reflecting top-tier client dedication.',
-      icon: Award
-    },
-    {
-      year: '2018',
-      title: 'CFP Certification & 100Cr Life Cover',
-      desc: 'Completed Certified Financial Planner credentials and crossed the milestone of managing 100 Crores in active life cover.',
-      icon: GraduationCap
-    },
-    {
-      year: '2021',
-      title: 'Court of the Table (COT)',
-      desc: 'Achieved Court of the Table honors, expanding the advisory team to support comprehensive estate and retirement planning.',
-      icon: Milestone
-    },
-    {
-      year: '2025',
-      title: 'Chairman\'s Club & 500Cr Cover',
-      desc: 'Inducted into the premier Chairman\'s Club, securing over 1,000 families with a cumulative life cover exceeding 500 Crores.',
-      icon: ShieldCheck
-    }
-  ];
-
   return (
     <motion.div
       initial="hidden"
@@ -69,18 +38,18 @@ export default function About() {
       <div className="absolute bottom-40 right-10 -z-10 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
+
         {/* Back Button — Mobile Only */}
         <div className="md:hidden mb-6">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Home
           </Link>
         </div>
-        
+
         {/* Profile / Intro Section */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-center">
           {/* Portrait Image */}
@@ -108,178 +77,321 @@ export default function About() {
               Crafting Personalized Roadmaps to <span className="text-primary">Financial Freedom</span>
             </h1>
             <p className="text-base text-slate-600 leading-relaxed">
-              With over 15 years of hands-on experience in insurance, wealth creation, and retirement mapping, my philosophy revolves around putting <strong>Family First</strong>. I believe that financial advisory is not just about numbers; it is about building security nets for your loved ones.
+              I started my career as a media  personal  with Satyavedh Magazine and Akashwani. My mentor, Mr. Arun Kumbhar (LIC Dev. Officer), introduced me to the world of Financial Welfare Planning, commonly referred to as Insurance. Later, my natural interest in meeting people and proper training gave me deep insight into this sector. Insurance and pension planning is the most appropriate and legal instrument to secure family lifestyles and personal dignity at an advanced age. Later, I added health insurance, banking, and the housing finance sector. It gives me immense pleasure to serve my clients and help them live a better, more satisfying financial life.
             </p>
             <p className="text-base text-slate-600 leading-relaxed">
-              As a premier Life Insurance consultant and wealth planner, my goal is to guide you away from standard off-the-shelf financial products, offering instead bespoke planning strategies aligned specifically with your life milestones.
+              I have 18 years of involvement with the Satyavedh Group as owner, Akashwani Sangli as anchor, daily Punyanagari as reporter, and Satyavedh Foundation (NGO) as founder.
             </p>
-
-            {/* Quick Metrics Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-slate-200">
-              <div>
-                <span className="block font-serif text-2xl font-bold text-primary">
-                  <Counter value="15" suffix="+" />
-                </span>
-                <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Years Exp</span>
-              </div>
-              <div>
-                <span className="block font-serif text-2xl font-bold text-primary">
-                  <Counter value="1000" suffix="+" />
-                </span>
-                <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Families Secured</span>
-              </div>
-              <div>
-                <span className="block font-serif text-2xl font-bold text-primary">
-                  <Counter value="500" suffix="Cr+" />
-                </span>
-                <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Cover Managed</span>
-              </div>
-              <div>
-                <span className="block font-serif text-2xl font-bold text-primary">
-                  <Counter value="98" suffix="%" />
-                </span>
-                <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Retention</span>
-              </div>
-            </div>
+            <p className="text-base text-slate-600 leading-relaxed">
+              We are ready to serve you with professional and industrial risk management, family income, and retirement cashflow.
+            </p>
           </motion.div>
         </div>
 
-        {/* Mission & Vision Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-24">
-          {/* Mission Card */}
-          <motion.div
-            variants={itemVariants}
-            whileHover={{ y: -5 }}
-            className="glass-card p-8 rounded-2xl border border-slate-100 flex gap-5"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <Target className="h-6 w-6" />
-            </div>
-            <div>
-              <h3 className="font-serif text-xl font-bold text-slate-800">Our Mission</h3>
-              <p className="mt-3 text-xs text-slate-600 leading-relaxed">
-                To replace financial anxiety with clarity. We strive to design protection-focused plans that ensure families can survive any storm and preserve their lifestyles across generations.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Vision Card */}
-          <motion.div
-            variants={itemVariants}
-            whileHover={{ y: -5 }}
-            className="glass-card p-8 rounded-2xl border border-slate-100 flex gap-5"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <Eye className="h-6 w-6" />
-            </div>
-            <div>
-              <h3 className="font-serif text-xl font-bold text-slate-800">Our Vision</h3>
-              <p className="mt-3 text-xs text-slate-600 leading-relaxed">
-                To be the most trusted financial safety partner in India, known for unmatched claim support speed, transparent advice, and client-first wealth preservation.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Career Timeline */}
-        <div className="mt-28">
-          <div className="text-center mb-16">
-            <span className="text-sm font-semibold tracking-widest text-primary uppercase">My Journey</span>
+        {/* Financial Parameters Section */}
+        <div className="mt-24">
+          <div className="text-center mb-12">
+            <span className="text-sm font-semibold tracking-widest text-primary uppercase">Portfolio Metrics</span>
             <h2 className="font-serif text-3xl font-bold text-slate-800 mt-2 md:text-4xl">
-              Professional Milestones & Evolution
+              Key Financial Parameters
             </h2>
             <div className="mx-auto mt-4 h-1 w-20 bg-primary rounded-full" />
-          </div>
-
-          <div className="relative border-l-2 border-primary/20 ml-4 md:ml-1/2 md:border-l-2">
-            {timelineEvents.map((evt, idx) => {
-              const Icon = evt.icon;
-              return (
-                <motion.div
-                  key={evt.year}
-                  variants={itemVariants}
-                  className={`relative mb-12 md:w-1/2 pl-8 md:pl-0 ${
-                    idx % 2 === 0 ? 'md:ml-auto md:pl-12' : 'md:mr-auto md:pr-12 md:text-right md:left-[-2px]'
-                  }`}
-                >
-                  {/* Timeline dot */}
-                  <div className={`absolute top-1.5 h-6 w-6 rounded-full border-2 border-primary bg-white flex items-center justify-center text-primary shadow-md ${
-                    idx % 2 === 0 ? 'left-[-13px] md:left-[-13px]' : 'left-[-13px] md:right-[-13px] md:left-auto'
-                  }`}>
-                    <Icon className="h-3 w-3" />
-                  </div>
-
-                  <div className="glass-card p-6 rounded-xl border border-slate-100">
-                    <span className="inline-block font-mono text-xs font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-md mb-2">
-                      {evt.year}
-                    </span>
-                    <h3 className="font-serif text-lg font-bold text-slate-800 mb-2">{evt.title}</h3>
-                    <p className="text-xs text-slate-500 leading-relaxed">{evt.desc}</p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Awards Section */}
-        <div className="mt-28 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Text block */}
-          <motion.div
-            variants={itemVariants}
-            className="lg:col-span-6 space-y-6 order-2 lg:order-1"
-          >
-            <span className="text-sm font-semibold tracking-widest text-primary uppercase">Recognized Excellence</span>
-            <h2 className="font-serif text-3xl font-bold text-slate-800 md:text-4xl">
-              Industry Credentials & National Awards
-            </h2>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Dedication to professional growth and ethical advisory has earned Rahul Kulkarni multiple accolades at the national level. Recognized by life insurance councils and global planning boards, these awards stand as a testament to the trust placed by over a thousand families.
+            <p className="mt-4 text-sm text-slate-500 max-w-2xl mx-auto">
+              A comprehensive view of managed capital, underwritten risks, and client success milestones.
             </p>
+          </div>
 
-            <div className="space-y-4">
-              <div className="flex gap-4 items-start">
-                <div className="h-2 w-2 rounded-full bg-primary mt-2 shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-slate-800 text-sm">Million Dollar Round Table (MDRT) Qualifier</h4>
-                  <p className="text-xs text-slate-500">Achieved MDRT status consecutively, recognizing elite client handling and ethics globally.</p>
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* 1. Investment Under Mgmt. */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass-card p-6 rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 hover:border-amber-500/30 hover:shadow-lg hover:shadow-amber-500/5 flex flex-col items-center text-center"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 text-amber-500 mb-4 shadow-sm">
+                <TrendingUp className="h-6 w-6" />
               </div>
-              <div className="flex gap-4 items-start">
-                <div className="h-2 w-2 rounded-full bg-primary mt-2 shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-slate-800 text-sm">LIC Chairman's Club Member</h4>
-                  <p className="text-xs text-slate-500">Awarded the highest tier membership for outstanding sales and customer service records in India.</p>
-                </div>
-              </div>
-              <div className="flex gap-4 items-start">
-                <div className="h-2 w-2 rounded-full bg-primary mt-2 shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-slate-800 text-sm">Certified Financial Planner (CFP) Honors</h4>
-                  <p className="text-xs text-slate-500">Recognized for excellence in advanced retirement, tax planning, and portfolio advisory.</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-2">
+                Investment Under Mgmt.
+              </span>
+              <span className="block font-serif text-2xl font-bold text-slate-800">
+                <Counter value="10.78" suffix=" Cr" />
+              </span>
+            </motion.div>
 
-          {/* Award Image */}
-          <motion.div
-            variants={itemVariants}
-            className="lg:col-span-6 flex justify-center order-1 lg:order-2"
-          >
-            <div className="relative group w-full max-w-md overflow-hidden rounded-2xl border border-slate-100 bg-slate-50 p-2.5 shadow-xl">
-              <motion.img
-                src={awardImg}
-                alt="Rahul Kulkarni receiving Award"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.5 }}
-                className="w-full max-h-[520px] object-cover object-top rounded-xl"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors duration-300" />
-            </div>
-          </motion.div>
+            {/* 2. Risk Under Mgmt. */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass-card p-6 rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 hover:border-indigo-500/30 hover:shadow-lg hover:shadow-indigo-500/5 flex flex-col items-center text-center"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-500 mb-4 shadow-sm">
+                <Gauge className="h-6 w-6" />
+              </div>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-2">
+                Risk Under Mgmt.
+              </span>
+              <span className="block font-serif text-2xl font-bold text-slate-800">
+                <Counter value="52.08" suffix=" Cr" />
+              </span>
+            </motion.div>
+
+            {/* 3. Claims Settled */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass-card p-6 rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/5 flex flex-col items-center text-center"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-500 mb-4 shadow-sm">
+                <FileText className="h-6 w-6" />
+              </div>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-2">
+                Claims Settled
+              </span>
+              <span className="block font-serif text-2xl font-bold text-slate-800">
+                <Counter value="4" suffix=" Cr+" />
+              </span>
+            </motion.div>
+
+            {/* 4. Clientele Base */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass-card p-6 rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 hover:border-sky-500/30 hover:shadow-lg hover:shadow-sky-500/5 flex flex-col items-center text-center"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-50 text-sky-500 mb-4 shadow-sm">
+                <Users className="h-6 w-6" />
+              </div>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-2">
+                Clientele Base
+              </span>
+              <span className="block font-serif text-2xl font-bold text-slate-800">
+                <Counter value="1000" suffix="+" />
+              </span>
+            </motion.div>
+
+            {/* 5. Highest Annual Premium */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass-card p-6 rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 hover:border-yellow-500/30 hover:shadow-lg hover:shadow-yellow-500/5 flex flex-col items-center text-center"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-50 text-yellow-600 mb-4 shadow-sm">
+                <Coins className="h-6 w-6" />
+              </div>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-2">
+                Highest Annual Premium
+              </span>
+              <span className="block font-serif text-2xl font-bold text-slate-800">
+                <Counter value="17" suffix=" Lakh" />
+              </span>
+            </motion.div>
+
+            {/* 6. Highest Life Cover */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass-card p-6 rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 hover:border-rose-500/30 hover:shadow-lg hover:shadow-rose-500/5 flex flex-col items-center text-center"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-rose-50 text-rose-500 mb-4 shadow-sm">
+                <Heart className="h-6 w-6" />
+              </div>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-2">
+                Highest Life Cover
+              </span>
+              <span className="block font-serif text-2xl font-bold text-slate-800">
+                <Counter value="3.5" suffix=" Cr" />
+              </span>
+              <span className="text-[9px] text-slate-500 mt-1 font-medium">(Single Life)</span>
+            </motion.div>
+
+            {/* 7. Home Loan Corpus */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass-card p-6 rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-500/5 flex flex-col items-center text-center"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50 text-teal-500 mb-4 shadow-sm">
+                <Home className="h-6 w-6" />
+              </div>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-2">
+                Home Loan Corpus
+              </span>
+              <span className="block font-serif text-2xl font-bold text-slate-800">
+                <Counter value="5" suffix=" Cr+" />
+              </span>
+            </motion.div>
+
+            {/* 8. Health Cover Corpus */}
+            <motion.div
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="glass-card p-6 rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 hover:border-red-500/30 hover:shadow-lg hover:shadow-red-500/5 flex flex-col items-center text-center"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 text-red-500 mb-4 shadow-sm">
+                <Activity className="h-6 w-6" />
+              </div>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-2">
+                Health Cover Corpus
+              </span>
+              <span className="block font-serif text-2xl font-bold text-slate-800">
+                <Counter value="4" suffix=" Cr+" />
+              </span>
+            </motion.div>
+          </div>
         </div>
+
+      </div>
+
+      {/* Showcase Video Section - Fully horizontal, full-bleed screen width (out of container frame) */}
+      <motion.div
+        variants={itemVariants}
+        className="mt-20 w-full overflow-hidden border-y border-slate-200/50 bg-[#f9fbfd] dark:bg-slate-900/50 relative z-10"
+      >
+        <div className="w-full h-[80vh]">
+          <video
+            src={rkVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            disablePictureInPicture
+            data-visualsearch="false"
+            className="w-full h-full object-cover pointer-events-none"
+          />
+        </div>
+      </motion.div>
+
+      {/* Content Below Video Section */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-20 pb-16">
+
+        {/* Accomplishments & Training Grid - Unified Box */}
+        <motion.div
+          variants={itemVariants}
+          className="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-3xl border border-slate-100 dark:border-slate-700/50 shadow-md mb-10"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:divide-x lg:divide-slate-100 dark:lg:divide-slate-700">
+
+            {/* Professional Accomplishments */}
+            <div className="lg:pr-8">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white shadow-md shadow-blue-500/20">
+                  <Award className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-xl font-bold text-blue-905 dark:text-blue-400">Professional Accomplishments</h3>
+                  <div className="mt-1 h-0.5 w-16 bg-blue-600 rounded-full" />
+                </div>
+              </div>
+              <ul className="space-y-3">
+                {[
+                  "MDRT (USA) Six Times in Row",
+                  "SAFAL (Singapore) Insurance ICON",
+                  "Youngest LIC Galaxy Club Member",
+                  "Star Health BM Club Member",
+                  "Best Performer DNS Bank Loans",
+                  "Insurance Centurion 3 Years",
+                  "Bima Bhushan, Bima Sanman & Bima Gaurav",
+                  "Division Rank 1 for Term Cover Sales"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm text-slate-650 dark:text-slate-350 font-semibold">
+                    <span className="text-blue-600 mt-1 font-extrabold text-xs">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Education & Training Associates */}
+            <div className="lg:pl-8">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-600 text-white shadow-md shadow-red-500/20">
+                  <GraduationCap className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-xl font-bold text-red-700 dark:text-red-400">Education & Training Associates</h3>
+                  <div className="mt-1 h-0.5 w-16 bg-red-600 rounded-full" />
+                </div>
+              </div>
+              <ul className="space-y-3">
+                {[
+                  "IIOE (Indian Institute of Excellence, Mumbai)",
+                  "IMFT (Institute of Marketing & Financial Training)",
+                  "SAFAL Singapore (South Asian Financial Advises League)",
+                  "Financial Planning & NRI Certification",
+                  "LIC STC Satara (Sales Training Centre)",
+                  "Member of Team Celebrate Life (Mr. Arun Kumbhar)"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm text-slate-650 dark:text-slate-350 font-semibold">
+                    <span className="text-red-600 mt-1 font-extrabold text-xs">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Logo Strip inside Education column */}
+              <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-700/50 flex justify-center">
+                <img
+                  src={logoImg}
+                  alt="Association & Accreditation Logos"
+                  className="w-[280px] sm:w-[350px] max-w-full h-auto object-contain pointer-events-none select-none"
+                  data-visualsearch="false"
+                  draggable="false"
+                />
+              </div>
+            </div>
+
+          </div>
+        </motion.div>
+
+        {/* Our Infrastructure & Office Setup */}
+        <motion.div
+          variants={itemVariants}
+          className="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-3xl border border-slate-100 dark:border-slate-700/50 shadow-md"
+        >
+          <div className="text-center mb-6">
+            <h3 className="font-serif text-xl font-bold text-blue-905 dark:text-blue-400">Our Infrastructure & Office Setup</h3>
+            <div className="mx-auto mt-2 h-0.5 w-12 bg-red-500 rounded-full" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:divide-x md:divide-slate-100 dark:md:divide-slate-700">
+
+            {/* Column 1 */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:px-4">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-900/50 shadow-sm animate-pulse-slow">
+                <Building2 className="h-6 w-6" />
+              </div>
+              <div className="text-center sm:text-left">
+                <h4 className="text-sm font-extrabold text-slate-800 dark:text-white">1000 Sq Ft Own Office</h4>
+                <p className="text-xs text-slate-400 font-semibold mt-0.5">Spacious & Fully Equipped</p>
+              </div>
+            </div>
+
+            {/* Column 2 */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:px-4">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/50 shadow-sm animate-pulse-slow">
+                <Users className="h-6 w-6" />
+              </div>
+              <div className="text-center sm:text-left">
+                <h4 className="text-sm font-extrabold text-slate-800 dark:text-white">Trained Servicing Staff</h4>
+                <p className="text-xs text-slate-400 font-semibold mt-0.5">Experienced & Dedicated Team</p>
+              </div>
+            </div>
+
+            {/* Column 3 */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:px-4">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/50 shadow-sm animate-pulse-slow">
+                <Monitor className="h-6 w-6" />
+              </div>
+              <div className="text-center sm:text-left">
+                <h4 className="text-sm font-extrabold text-slate-800 dark:text-white">Advanced IT Cell</h4>
+                <p className="text-xs text-slate-400 font-semibold mt-0.5">Technology-Driven Operations</p>
+              </div>
+            </div>
+
+          </div>
+
+        </motion.div>
 
       </div>
     </motion.div>

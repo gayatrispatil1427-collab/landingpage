@@ -7,10 +7,9 @@ export default function Counter({ value, suffix = '', duration = 1800 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
 
-  // Extract numeric part (e.g. "1000" from "1000+", "500" from "500Cr+")
-  const numericValue = parseInt(String(value).replace(/[^0-9]/g, ''), 10) || 0;
+  const hasDecimal = String(value).includes('.');
+  const numericValue = parseFloat(String(value).replace(/[^0-9.]/g, '')) || 0;
 
-  // Smooth easeOut count-up via requestAnimationFrame
   useEffect(() => {
     if (!isInView) return;
 
@@ -22,7 +21,8 @@ export default function Counter({ value, suffix = '', duration = 1800 }) {
       const progress = Math.min(elapsed / duration, 1);
       // easeOut cubic
       const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(eased * numericValue);
+      const currentRaw = eased * numericValue;
+      const current = hasDecimal ? parseFloat(currentRaw.toFixed(2)) : Math.round(currentRaw);
       setCount(current);
       if (progress < 1) {
         requestAnimationFrame(step);
@@ -33,15 +33,14 @@ export default function Counter({ value, suffix = '', duration = 1800 }) {
     };
 
     requestAnimationFrame(step);
-  }, [isInView, numericValue, duration]);
+  }, [isInView, numericValue, duration, hasDecimal]);
 
-  // Format nicely (add commas for large numbers)
-  const displayValue = count.toLocaleString('en-IN') + suffix;
+  // Format nicely (add commas for large numbers, support decimals)
+  const displayValue = (hasDecimal ? count.toFixed(2) : count.toLocaleString('en-IN')) + suffix;
 
   return (
     <motion.span
       ref={ref}
-      // Gentle pulse when count-up finishes
       animate={done ? { scale: [1, 1.06, 1] } : {}}
       transition={{ duration: 0.45, ease: 'easeInOut' }}
       className="font-mono inline-block"

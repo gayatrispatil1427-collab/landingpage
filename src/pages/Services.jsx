@@ -93,7 +93,13 @@ export default function Services({ onOpenModal }) {
       icon: Target,
       tag: "Strategy",
       desc: "Develop tailored wealth strategies and asset allocations aligned with your unique family milestones and risk profiles.",
-      benefits: ["Goal-based Asset Mapping", "Personalized Risk Assessments", "Milestone-linked Portfolio Design"]
+      benefits: ["Goal-based Asset Mapping", "Personalized Risk Assessments", "Milestone-linked Portfolio Design"],
+      colorTheme: {
+        tagBg: "bg-indigo-50 text-indigo-650 border border-indigo-100/50",
+        iconBg: "bg-indigo-50 text-indigo-500",
+        headingHover: "group-hover:text-indigo-650",
+        borderHover: "hover:border-indigo-500/30 hover:shadow-[0_15px_35px_rgba(99,102,241,0.06)]"
+      }
     },
     {
       id: 2,
@@ -101,7 +107,13 @@ export default function Services({ onOpenModal }) {
       icon: HeartPulse,
       tag: "Security",
       desc: "Guard your hard-earned savings against medical inflation with extensive family floater health plans and critical illness covers.",
-      benefits: ["Cashless Hospitalization", "Restoration Benefits", "Super Top-up Planning"]
+      benefits: ["Cashless Hospitalization", "Restoration Benefits", "Super Top-up Planning"],
+      colorTheme: {
+        tagBg: "bg-red-50 text-red-655 border border-red-100/50",
+        iconBg: "bg-red-50 text-red-500",
+        headingHover: "group-hover:text-red-650",
+        borderHover: "hover:border-red-500/30 hover:shadow-[0_15px_35px_rgba(239,68,68,0.06)]"
+      }
     },
     {
       id: 3,
@@ -109,7 +121,13 @@ export default function Services({ onOpenModal }) {
       icon: Sunset,
       tag: "Independence",
       desc: "Design a tax-efficient retirement lifestyle that provides regular monthly annuity flows, keeping you financially independent forever.",
-      benefits: ["Guaranteed Pension Plans", "Immediate & Deferred Annuity", "NPS & Custom Portfolios"]
+      benefits: ["Guaranteed Pension Plans", "Immediate & Deferred Annuity", "NPS & Custom Portfolios"],
+      colorTheme: {
+        tagBg: "bg-amber-50 text-amber-655 border border-amber-100/50",
+        iconBg: "bg-amber-50 text-amber-500",
+        headingHover: "group-hover:text-amber-650",
+        borderHover: "hover:border-amber-500/30 hover:shadow-[0_15px_35px_rgba(245,158,11,0.06)]"
+      }
     },
     {
       id: 4,
@@ -117,7 +135,13 @@ export default function Services({ onOpenModal }) {
       icon: GraduationCap,
       tag: "Future",
       desc: "Secure the rising costs of higher education. Build a dedicated inflation-adjusted fund for your child's dreams.",
-      benefits: ["Guaranteed Maturity Benefits", "Educational Trust Setup", "Goal-linked Mutual Funds"]
+      benefits: ["Guaranteed Maturity Benefits", "Educational Trust Setup", "Goal-linked Mutual Funds"],
+      colorTheme: {
+        tagBg: "bg-sky-50 text-sky-655 border border-sky-100/50",
+        iconBg: "bg-sky-50 text-sky-500",
+        headingHover: "group-hover:text-sky-650",
+        borderHover: "hover:border-sky-500/30 hover:shadow-[0_15px_35px_rgba(14,165,233,0.06)]"
+      }
     },
     {
       id: 5,
@@ -125,7 +149,13 @@ export default function Services({ onOpenModal }) {
       icon: TrendingUp,
       tag: "Growth",
       desc: "Capitalize on market opportunities using systematic risk-managed investments to compound wealth over the long term.",
-      benefits: ["SIP & Lumpsum Advisory", "Custom Mutual Fund Portfolios", "Equities & Bonds Diversification"]
+      benefits: ["SIP & Lumpsum Advisory", "Custom Mutual Fund Portfolios", "Equities & Bonds Diversification"],
+      colorTheme: {
+        tagBg: "bg-yellow-50 text-yellow-655 border border-yellow-100/50",
+        iconBg: "bg-yellow-50 text-yellow-600",
+        headingHover: "group-hover:text-yellow-650",
+        borderHover: "hover:border-yellow-500/30 hover:shadow-[0_15px_35px_rgba(234,179,8,0.06)]"
+      }
     },
     {
       id: 6,
@@ -133,7 +163,13 @@ export default function Services({ onOpenModal }) {
       icon: PiggyBank,
       tag: "Optimization",
       desc: "Legally optimize your income tax liabilities using Section 80C, 80D, and other tax exemptions while growing your wealth.",
-      benefits: ["ELSS Tax Saving Funds", "Tax-Free Maturity Schemes", "Corporate Tax Restructuring"]
+      benefits: ["ELSS Tax Saving Funds", "Tax-Free Maturity Schemes", "Corporate Tax Restructuring"],
+      colorTheme: {
+        tagBg: "bg-emerald-50 text-emerald-655 border border-emerald-100/50",
+        iconBg: "bg-emerald-50 text-emerald-500",
+        headingHover: "group-hover:text-emerald-650",
+        borderHover: "hover:border-emerald-500/30 hover:shadow-[0_15px_35px_rgba(16,185,129,0.06)]"
+      }
     },
     {
       id: 7,
@@ -141,7 +177,13 @@ export default function Services({ onOpenModal }) {
       icon: Target,
       tag: "Strategy",
       desc: "Map your dreams—whether buying a home, planning a vacation, or starting a business—to real-time, actionable milestones.",
-      benefits: ["Goal Gap Analysis", "Time-horizon Asset Mapping", "Periodic Portfolio Balancing"]
+      benefits: ["Goal Gap Analysis", "Time-horizon Asset Mapping", "Periodic Portfolio Balancing"],
+      colorTheme: {
+        tagBg: "bg-violet-50 text-violet-655 border border-violet-100/50",
+        iconBg: "bg-violet-50 text-violet-500",
+        headingHover: "group-hover:text-violet-650",
+        borderHover: "hover:border-violet-500/30 hover:shadow-[0_15px_35px_rgba(139,92,246,0.06)]"
+      }
     },
     {
       id: 8,
@@ -149,7 +191,13 @@ export default function Services({ onOpenModal }) {
       icon: Briefcase,
       tag: "Expertise",
       desc: "Professional guidance to balance portfolio asset allocations based on your age, risk appetite, and liquidity needs.",
-      benefits: ["Asset Allocation Strategy", "Quarterly Portfolio Review", "Risk Assessment Analysis"]
+      benefits: ["Asset Allocation Strategy", "Quarterly Portfolio Review", "Risk Assessment Analysis"],
+      colorTheme: {
+        tagBg: "bg-teal-50 text-teal-655 border border-teal-100/50",
+        iconBg: "bg-teal-50 text-teal-500",
+        headingHover: "group-hover:text-teal-650",
+        borderHover: "hover:border-teal-500/30 hover:shadow-[0_15px_35px_rgba(20,184,166,0.06)]"
+      }
     }
   ];
 
@@ -193,11 +241,12 @@ export default function Services({ onOpenModal }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {servicesData.map((svc) => {
             const Icon = svc.icon;
+            const theme = svc.colorTheme;
             return (
               <motion.div
                 key={svc.id}
                 variants={itemVariants}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl p-6 glass-card border border-slate-100 transition-all duration-300 hover:border-primary/30 hover:shadow-[0_15px_35px_rgba(11,94,215,0.06)] hover:-translate-y-2"
+                className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl p-6 glass-card border border-slate-100 transition-all duration-300 hover:-translate-y-2 ${theme.borderHover}`}
               >
                 {/* Background glow overlay */}
                 <div className="absolute -inset-px bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -205,17 +254,17 @@ export default function Services({ onOpenModal }) {
                 <div>
                   {/* Icon & Category Tag */}
                   <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-[10px] tracking-widest text-primary font-bold uppercase bg-primary/10 px-2.5 py-1 rounded-md">
+                    <span className={`font-mono text-[10px] tracking-widest font-bold uppercase px-2.5 py-1 rounded-md ${theme.tagBg}`}>
                       {svc.tag}
                     </span>
                     {/* Icon container with hover rotation */}
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-500 group-hover:rotate-12">
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-500 group-hover:rotate-12 shadow-inner ${theme.iconBg}`}>
                       <Icon className="h-6 w-6" />
                     </div>
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="font-serif text-lg font-bold text-slate-800 mb-3 group-hover:text-primary transition-colors">
+                  <h3 className={`font-serif text-lg font-bold text-slate-800 mb-3 transition-colors ${theme.headingHover}`}>
                     {svc.title}
                   </h3>
                   <p className="text-xs text-slate-500 leading-relaxed mb-6">
@@ -226,7 +275,7 @@ export default function Services({ onOpenModal }) {
                   <ul className="space-y-2 mb-6 border-t border-slate-100 pt-4">
                     {svc.benefits.map((benefit, i) => (
                       <li key={i} className="flex items-center gap-2 text-[11px] text-slate-600 font-medium">
-                        <ChevronRight className="h-3 w-3 text-primary shrink-0" />
+                        <ChevronRight className={`h-3 w-3 shrink-0 text-slate-450`} />
                         <span>{benefit}</span>
                       </li>
                     ))}

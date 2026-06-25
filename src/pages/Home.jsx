@@ -7,7 +7,7 @@ import {
   Quote, Maximize2, X, Send, Award, Calendar, Landmark, Coins,
   TrendingUp, Sparkles, AlertCircle, Play, ChevronRight, Users,
   Percent, FileText, Check, Shield, Zap, Target, BookOpen, MapPin, Phone, Mail,
-  Clock, Share2
+  Clock, Share2, Eye, Handshake
 } from 'lucide-react';
 import Counter from '../components/Counter';
 import CardSlider from '../components/CardSlider';
@@ -40,7 +40,7 @@ export default function Home({ onOpenModal }) {
   const handleShare = async (e, item, type = 'service') => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     const hash = encodeURIComponent(item.title.replace(/\s+/g, '-').toLowerCase());
     const shareUrl = `${window.location.origin}/${type === 'blog' ? 'blog' : 'services'}#${hash}`;
     const shareText = `Check out ${item.title}: ${item.desc || ''}`;
@@ -116,12 +116,62 @@ export default function Home({ onOpenModal }) {
     });
   }, [sipAmount, expectedReturn, sipYears]);
 
-  // Auto slide testimonials
+  // Mobile testimonial index and autoplay
+  const [mobileIndex, setMobileIndex] = useState(0);
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
+      setMobileIndex((prev) => (prev + 1) % 6);
+    }, 4000);
     return () => clearInterval(timer);
+  }, []);
+
+  // Swipe support for mobile testimonial slider
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      setMobileIndex((prev) => (prev + 1) % 6);
+    } else if (isRightSwipe) {
+      setMobileIndex((prev) => (prev - 1 + 6) % 6);
+    }
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
+  // Testimonials intersection observer for scroll animation (animates once)
+  const testimonialSectionRef = useRef(null);
+  const [testimonialSectionInView, setTestimonialSectionInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTestimonialSectionInView(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (testimonialSectionRef.current) {
+      observer.observe(testimonialSectionRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   const onCheckupSubmit = async (data) => {
@@ -144,27 +194,51 @@ export default function Home({ onOpenModal }) {
 
   const testimonials = [
     {
-      name: "Mr. Satish Ranade",
-      role: "VP, Tech Mahindra",
-      text: "Rahul has been managing our family portfolio for 10+ years. His responsiveness during a medical claim last year was outstanding. He coordinated everything directly with the hospital.",
+      name: "Dr. Shriniketan Kale",
+      role: "Oncologist",
+      text: "We medical professionals too need to manage large cashflow for our financial security. Rahul has clear concepts for professional indemnity, income replacement for family and retirement cashflow.",
       rating: 5,
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120&h=120",
       youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     {
-      name: "Dr. Ananya Joshi",
-      role: "Pediatrician",
-      text: "Highly professional advice. Rahul helped us set up our daughter's educational fund when she was born. We now have complete clarity and a secure path for her foreign studies.",
+      name: "Mrs. Samprada Bidkar",
+      role: "Govt. Officer, DIO Nashik",
+      text: "It was really wonderful to plan my retirement cashflow with Rahul's principled guidance. He has helped me to plan my family pension system akin to pre 2004 government pension. Now I have no tension.",
       rating: 5,
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120&h=120",
       youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     {
-      name: "Mr. Rajesh Khanna",
-      role: "Owner, Khanna Logistics",
-      text: "Separating insurance from investments was a game-changer. Rahul guided me out of expensive endowment plans into clean term cover and diversified SIPs. Highly recommended!",
+      name: "Mr. Mahesh Patil",
+      role: "Industrialist",
+      text: "Financial planning needs after sales services like renewal, loans and claims. Rahul Kulkarni has great acumen for this and has helped our industry in settling claims.",
       rating: 5,
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120&h=120",
+      youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      name: "Mr. Sumit Kulkarni",
+      role: "Cognizant IT Professional",
+      text: "I was really unplanned with big salary and company facility. Mr. Rahul Kulkarni conceptually helped to secure my early retirement, lifestyle and replace income.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=120&h=120",
+      youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      name: "Arun Kumbhar",
+      role: "Development Officer LIC",
+      text: "Rahul has great love for learning & very serious about handling customers money. He is great motivator for my team adviser. He has developed own office with staff and infrastructure for long term customer care.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=120&h=120",
+      youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      name: "Prof. Dr. Rahul Sakpal",
+      role: "MD Pathologist",
+      text: "Family health insurance is must for medical emergencies. Rahul has helped me to secure and service my health claim in right way.",
+      rating: 5,
+      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=120&h=120",
       youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }
   ];
@@ -226,76 +300,114 @@ export default function Home({ onOpenModal }) {
     { src: awardImg, caption: "National Award Recognition Plaque", type: "Awards", pos: "object-top" },
     { src: eventImg, caption: "LIC Chairman's Club Ceremony On-stage Showcase", type: "Success Wall", pos: "object-center" }
   ];
-
   const services = [
     {
       icon: Target,
       title: "Customised Planning",
-      desc: "Tailored wealth strategies and asset allocations aligned with your unique family milestones and risk profiles."
+      desc: "Tailored wealth strategies and asset allocations aligned with your unique family milestones and risk profiles.",
+      colorTheme: {
+        iconBg: "bg-indigo-50 text-indigo-500",
+        headingHover: "group-hover:text-indigo-650",
+        borderHover: "hover:border-indigo-500/30 hover:shadow-[0_15px_35px_rgba(99,102,241,0.06)]"
+      }
     },
     {
       icon: Heart,
       title: "Health Insurance Planning",
-      desc: "High-limit medical floaters, critical illness buffers, and cash-free claim settlement coordinate."
+      desc: "High-limit medical floaters, critical illness buffers, and cash-free claim settlement coordinate.",
+      colorTheme: {
+        iconBg: "bg-red-50 text-red-500",
+        headingHover: "group-hover:text-red-650",
+        borderHover: "hover:border-red-500/30 hover:shadow-[0_15px_35px_rgba(239,68,68,0.06)]"
+      }
     },
     {
       icon: Landmark,
       title: "Retirement Planning",
-      desc: "Lock guaranteed annuity payouts for life using tax-saving options to maintain full independence."
+      desc: "Lock guaranteed annuity payouts for life using tax-saving options to maintain full independence.",
+      colorTheme: {
+        iconBg: "bg-amber-50 text-amber-500",
+        headingHover: "group-hover:text-amber-650",
+        borderHover: "hover:border-amber-500/30 hover:shadow-[0_15px_35px_rgba(245,158,11,0.06)]"
+      }
     },
     {
       icon: TrendingUp,
       title: "Investment Planning",
-      desc: "Systematic Investment Plans (SIP) mapping capital to long-term index targets."
+      desc: "Systematic Investment Plans (SIP) mapping capital to long-term index targets.",
+      colorTheme: {
+        iconBg: "bg-sky-50 text-sky-500",
+        headingHover: "group-hover:text-sky-650",
+        borderHover: "hover:border-sky-500/30 hover:shadow-[0_15px_35px_rgba(14,165,233,0.06)]"
+      }
     },
     {
       icon: Coins,
       title: "Tax Planning",
-      desc: "Optimize capital declarations under Sec 80C, 80D, and 10(10D) to legally retain high yields."
+      desc: "Optimize capital declarations under Sec 80C, 80D, and 10(10D) to legally retain high yields.",
+      colorTheme: {
+        iconBg: "bg-yellow-50 text-yellow-600",
+        headingHover: "group-hover:text-yellow-650",
+        borderHover: "hover:border-yellow-500/30 hover:shadow-[0_15px_35px_rgba(234,179,8,0.06)]"
+      }
     },
     {
       icon: GraduationCap,
       title: "Child Education Planning",
       desc: "Establish educational trusts matching inflation milestones, securing tuition reserves.",
-      isPremium: true
+      isPremium: true,
+      colorTheme: {
+        iconBg: "bg-rose-50 text-rose-500",
+        headingHover: "group-hover:text-rose-650",
+        borderHover: "hover:border-rose-500/30 hover:shadow-[0_15px_35px_rgba(239,70,111,0.06)]"
+      }
     },
     {
       icon: "WC",
       title: "Wealth Creation",
       desc: "High-net-worth preservation models, re-balancing strategies, and sovereign debt assets allocation mapping.",
-      isGold: true
+      isGold: true,
+      colorTheme: {
+        iconBg: "bg-amber-50 text-amber-600",
+        headingHover: "group-hover:text-amber-650",
+        borderHover: "hover:border-amber-500/30 hover:shadow-[0_15px_35px_rgba(245,158,11,0.06)]"
+      }
     },
     {
       icon: Target,
       title: "Financial Goal Planning",
-      desc: "Comprehensive safety-to-growth ratio design matching custom family timeline targets."
+      desc: "Comprehensive safety-to-growth ratio design matching custom family timeline targets.",
+      colorTheme: {
+        iconBg: "bg-violet-50 text-violet-500",
+        headingHover: "group-hover:text-violet-650",
+        borderHover: "hover:border-violet-500/30 hover:shadow-[0_15px_35px_rgba(139,92,246,0.06)]"
+      }
     }
   ];
 
   const renderServiceCard = (service, idx) => {
     const IconComponent = service.icon;
     const isCustomIcon = typeof service.icon === 'string';
+    const theme = service.colorTheme;
 
     return (
-      <div className={`w-80 md:w-96 h-[260px] bg-white p-8 rounded-3xl border flex flex-col justify-between group hover:border-primary/30 transition-all shadow-sm ${service.isGold ? 'border-gold-500/25' : 'border-slate-100'
+      <div className={`w-80 md:w-96 h-[260px] bg-white p-8 rounded-3xl border flex flex-col justify-between group transition-all shadow-sm ${theme.borderHover} ${service.isGold ? 'border-gold-500/25' : 'border-slate-100'
         } ${service.isPremium ? 'bg-primary/5' : ''}`}>
         <div>
-          <div className={`h-10 w-10 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform mb-6 font-bold text-xs ${service.isGold
-            ? 'bg-gold-500/10 text-gold-500'
-            : 'bg-primary/10 text-primary'
-            }`}>
+          <div className={`h-10 w-10 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform mb-6 font-bold text-xs shadow-inner ${theme.iconBg}`}>
             {isCustomIcon ? service.icon : <IconComponent className="h-5 w-5" />}
           </div>
-          <h3 className="font-serif text-lg font-bold text-slate-900 dark:text-white mb-2">{service.title}</h3>
+          <h3 className={`font-serif text-lg font-bold text-slate-900 dark:text-white mb-2 transition-colors ${theme.headingHover}`}>{service.title}</h3>
           <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
             {service.desc}
           </p>
         </div>
         <div className="flex items-center justify-between w-full mt-6">
-          <button 
+          <button
             type="button"
             onClick={(e) => handleShare(e, service, 'services')}
-            className="text-xs font-bold text-slate-550 hover:text-primary inline-flex items-center gap-1.5 uppercase cursor-pointer"
+            className="text-xs font-bold text-slate-555 hover:text-primary inline-flex items-center gap-1.5 uppercase cursor-pointer"
+            title="Share Service"
           >
             <Share2 className="h-3.5 w-3.5" />
             Share
@@ -492,7 +604,7 @@ export default function Home({ onOpenModal }) {
                 <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-3">
                   <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-slate-900 dark:text-white shrink-0" />
                   <div className="flex flex-col">
-                    <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white leading-none">15+ Years</span>
+                    <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white leading-none">18+ Years</span>
                     <span className="text-[8px] sm:text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold mt-1">Experience</span>
                   </div>
                 </div>
@@ -527,72 +639,92 @@ export default function Home({ onOpenModal }) {
             className="grid grid-cols-2 lg:grid-cols-4 gap-8"
           >
 
-            {/* Card 1 — 1,000+ Families Protected */}
+            {/* Card 1 — 1,000+ Families PROTECTED */}
             <motion.div
               variants={statsCardVariants}
               whileHover={{
                 y: -8,
                 scale: 1.03,
-                boxShadow: "0 20px 40px -12px rgba(37, 99, 235, 0.18), 0 0 0 1.5px rgba(37, 99, 235, 0.4)"
+                boxShadow: "0 20px 40px -12px rgba(14, 165, 233, 0.18), 0 0 0 1.5px rgba(14, 165, 233, 0.4)"
               }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="p-6 rounded-2xl glass-card border border-slate-100 text-center shadow-sm cursor-pointer group"
+              className="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 text-center shadow-sm cursor-pointer flex flex-col items-center"
             >
-              <span className="block font-serif text-3xl sm:text-4xl font-extrabold text-primary mb-2">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 dark:bg-sky-950/20 text-sky-500 mb-3 shadow-inner">
+                <Users className="h-5 w-5" />
+              </div>
+              <span className="block font-serif text-2xl font-bold text-slate-800 dark:text-white">
                 <Counter value="1000" suffix="+" />
               </span>
-              <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold group-hover:text-primary transition-colors duration-300">Families Protected</span>
+              <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-bold mt-1">
+                Families Protected
+              </span>
             </motion.div>
 
-            {/* Card 2 — 500Cr+ Coverage Managed */}
+            {/* Card 2 — 52.08 Cr RISK UNDER MANAGEMENT */}
             <motion.div
               variants={statsCardVariants}
               whileHover={{
                 y: -8,
                 scale: 1.03,
-                boxShadow: "0 20px 40px -12px rgba(37, 99, 235, 0.18), 0 0 0 1.5px rgba(37, 99, 235, 0.4)"
+                boxShadow: "0 20px 40px -12px rgba(99, 102, 241, 0.18), 0 0 0 1.5px rgba(99, 102, 241, 0.4)"
               }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="p-6 rounded-2xl glass-card border border-slate-100 text-center shadow-sm cursor-pointer group"
+              className="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 text-center shadow-sm cursor-pointer flex flex-col items-center"
             >
-              <span className="block font-serif text-3xl sm:text-4xl font-extrabold text-primary mb-2">
-                <Counter value="500" suffix="Cr+" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-950/20 text-indigo-500 mb-3 shadow-inner">
+                <ShieldCheck className="h-5 w-5" />
+              </div>
+              <span className="block font-serif text-2xl font-bold text-slate-800 dark:text-white">
+                <Counter value="52.08" suffix=" Cr" />
               </span>
-              <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold group-hover:text-primary transition-colors duration-300">Coverage Managed</span>
+              <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-bold mt-1">
+                Risk Under Mgmt.
+              </span>
             </motion.div>
 
-            {/* Card 3 — 15+ Years Experience */}
+            {/* Card 3 — 18+ Years EXPERIENCE */}
             <motion.div
               variants={statsCardVariants}
               whileHover={{
                 y: -8,
                 scale: 1.03,
-                boxShadow: "0 20px 40px -12px rgba(37, 99, 235, 0.18), 0 0 0 1.5px rgba(37, 99, 235, 0.4)"
+                boxShadow: "0 20px 40px -12px rgba(245, 158, 11, 0.18), 0 0 0 1.5px rgba(245, 158, 11, 0.4)"
               }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="p-6 rounded-2xl glass-card border border-slate-100 text-center shadow-sm cursor-pointer group"
+              className="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 text-center shadow-sm cursor-pointer flex flex-col items-center"
             >
-              <span className="block font-serif text-3xl sm:text-4xl font-extrabold text-primary mb-2">
-                <Counter value="15" suffix="+" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-950/20 text-amber-500 mb-3 shadow-inner">
+                <Clock className="h-5 w-5" />
+              </div>
+              <span className="block font-serif text-2xl font-bold text-slate-800 dark:text-white">
+                <Counter value="18" suffix="+ Years" />
               </span>
-              <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold group-hover:text-primary transition-colors duration-300">Years Experience</span>
+              <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-bold mt-1">
+                Experience
+              </span>
             </motion.div>
 
-            {/* Card 4 — 98% Client Satisfaction */}
+            {/* Card 4 — 4 Cr+ CLAIMS SETTLED */}
             <motion.div
               variants={statsCardVariants}
               whileHover={{
                 y: -8,
                 scale: 1.03,
-                boxShadow: "0 20px 40px -12px rgba(37, 99, 235, 0.18), 0 0 0 1.5px rgba(37, 99, 235, 0.4)"
+                boxShadow: "0 20px 40px -12px rgba(16, 185, 129, 0.18), 0 0 0 1.5px rgba(16, 185, 129, 0.4)"
               }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="p-6 rounded-2xl glass-card border border-slate-100 text-center shadow-sm cursor-pointer group"
+              className="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 text-center shadow-sm cursor-pointer flex flex-col items-center"
             >
-              <span className="block font-serif text-3xl sm:text-4xl font-extrabold text-primary mb-2">
-                <Counter value="98" suffix="%" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/20 text-emerald-500 mb-3 shadow-inner">
+                <Award className="h-5 w-5" />
+              </div>
+              <span className="block font-serif text-2xl font-bold text-slate-800 dark:text-white">
+                <Counter value="4" suffix=" Cr+" />
               </span>
-              <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold group-hover:text-primary transition-colors duration-300">Client Satisfaction</span>
+              <span className="text-[9px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-bold mt-1">
+                Claims Settled
+              </span>
             </motion.div>
 
           </motion.div>
@@ -612,71 +744,52 @@ export default function Home({ onOpenModal }) {
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-800 leading-tight">
                 Crafting roadmaps to <span className="text-primary">Financial Freedom</span>
               </h2>
-              <p className="text-xs text-slate-550 text-slate-500 leading-relaxed">
-                Rahul Kulkarni has spent the last 15+ years restructuring policy portfolios to remove high-cost products and replace them with clear safety-first solutions. Our advisory works to protect family livelihoods above index speculation.
+              <p className="text-[13px] text-slate-500 leading-relaxed">
+                I started my career as a media personal with Satyavedh Magazine and Akashwani, before transitioning to Financial Welfare Planning under the guidance of Mr. Arun Kumbhar. With over 18 years of experience, I specialize in securing family lifestyles, retirement cashflows, and industrial risk management.
               </p>
 
-              {/* Mission, Vision, Values Bento grid */}
+              {/* Vision, Mission & Values Section */}
               <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
                 variants={mvvContainerVariants}
-                className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4"
+                className="glass-card p-5 rounded-2xl border border-slate-100 mt-4 shadow-sm"
               >
-                {/* Mission Card */}
-                <motion.div
-                  variants={missionVariants}
-                  whileHover={{ y: -6, scale: 1.03, boxShadow: "0 15px 30px -10px rgba(37, 99, 235, 0.15), 0 0 0 1px rgba(37, 99, 235, 0.45)" }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer transition-colors duration-300 hover:border-primary/50"
-                >
-                  <motion.div
-                    animate={{ y: [0, -4, 0] }}
-                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0 }}
-                    className="h-8 w-8 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-3 shadow-inner"
-                  >
-                    <Target className="h-4.5 w-4.5" />
-                  </motion.div>
-                  <h4 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-1">Mission</h4>
-                  <p className="text-[10px] text-slate-550 dark:text-slate-400 leading-relaxed">To replace financial anxiety with security.</p>
-                </motion.div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:divide-x sm:divide-slate-200">
+                  {/* Vision Column */}
+                  <div className="flex flex-col items-center text-center px-2">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-950/20 text-indigo-500 mb-2 shadow-inner">
+                      <Eye className="h-5 w-5" />
+                    </div>
+                    <h4 className="font-serif text-[13px] font-bold text-indigo-600 dark:text-indigo-400 leading-none mb-1">Vision</h4>
+                    <p className="text-[10px] text-slate-650 leading-relaxed font-semibold">
+                      Dignity & Lifestyle Protection
+                    </p>
+                  </div>
 
-                {/* Vision Card */}
-                <motion.div
-                  variants={visionVariants}
-                  whileHover={{ y: -6, scale: 1.03, boxShadow: "0 15px 30px -10px rgba(37, 99, 235, 0.15), 0 0 0 1px rgba(37, 99, 235, 0.45)" }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer transition-colors duration-300 hover:border-primary/50"
-                >
-                  <motion.div
-                    animate={{ y: [0, -4, 0] }}
-                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 }}
-                    className="h-8 w-8 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-3 shadow-inner"
-                  >
-                    <Sparkles className="h-4.5 w-4.5" />
-                  </motion.div>
-                  <h4 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-1">Vision</h4>
-                  <p className="text-[10px] text-slate-550 dark:text-slate-400 leading-relaxed">Secure 5,000 families with stable lifetime income.</p>
-                </motion.div>
+                  {/* Mission Column */}
+                  <div className="flex flex-col items-center text-center px-2 sm:pl-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-950/20 text-rose-500 mb-2 shadow-inner">
+                      <Target className="h-5 w-5" />
+                    </div>
+                    <h4 className="font-serif text-[13px] font-bold text-rose-600 dark:text-rose-400 leading-none mb-1">Mission</h4>
+                    <p className="text-[10px] text-slate-650 leading-relaxed font-semibold">
+                      Financial Literacy
+                    </p>
+                  </div>
 
-                {/* Values Card */}
-                <motion.div
-                  variants={valuesVariants}
-                  whileHover={{ y: -6, scale: 1.03, boxShadow: "0 15px 30px -10px rgba(37, 99, 235, 0.15), 0 0 0 1px rgba(37, 99, 235, 0.45)" }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 shadow-sm cursor-pointer transition-colors duration-300 hover:border-primary/50"
-                >
-                  <motion.div
-                    animate={{ y: [0, -4, 0] }}
-                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1.0 }}
-                    className="h-8 w-8 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary flex items-center justify-center mb-3 shadow-inner"
-                  >
-                    <ShieldCheck className="h-4.5 w-4.5" />
-                  </motion.div>
-                  <h4 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-1">Values</h4>
-                  <p className="text-[10px] text-slate-550 dark:text-slate-400 leading-relaxed">Absolute transparency in client advisory.</p>
-                </motion.div>
+                  {/* Core Values Column */}
+                  <div className="flex flex-col items-center text-center px-2 sm:pl-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/20 text-emerald-500 mb-2 shadow-inner">
+                      <Handshake className="h-5 w-5" />
+                    </div>
+                    <h4 className="font-serif text-[13px] font-bold text-emerald-600 dark:text-emerald-400 leading-none mb-1">Core Values</h4>
+                    <p className="text-[10px] text-slate-650 leading-relaxed font-semibold">
+                      Risk Assessments, Customised Planning & Servicing
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             </div>
 
@@ -685,14 +798,14 @@ export default function Home({ onOpenModal }) {
               <h3 className="font-serif text-xl font-bold text-slate-800 mb-6">Professional Journey</h3>
 
               <div className="space-y-6 relative before:absolute before:left-6 before:top-2 before:bottom-2 before:w-[1px] before:bg-slate-200">
-                {/* 2022 */}
+                {/* 2015 */}
                 <div className="flex gap-6 relative items-start">
-                  <div className="h-7 w-12 rounded-full bg-primary text-white font-mono text-[10px] font-bold flex items-center justify-center shrink-0 shadow-md">
-                    2022
+                  <div className="h-7 w-12 rounded-full bg-gold-500 text-white font-mono text-[10px] font-bold flex items-center justify-center shrink-0 shadow-md">
+                    2015
                   </div>
                   <div>
-                    <h4 className="font-serif text-sm font-bold text-slate-800">Financial Journey Starts</h4>
-                    <p className="text-[11px] text-slate-500 mt-1">Began LIC advisory in Pune with a focus on term protection and claim processing.</p>
+                    <h4 className="font-serif text-sm font-bold text-slate-800">Youngest LIC Galaxy Club Member</h4>
+                    <p className="text-[11px] text-slate-500 mt-1">Achieved elite status as the youngest member in the region, managing complex wealth portfolios.</p>
                   </div>
                 </div>
 
@@ -707,14 +820,14 @@ export default function Home({ onOpenModal }) {
                   </div>
                 </div>
 
-                {/* 2015 */}
+                {/* 2022 */}
                 <div className="flex gap-6 relative items-start">
-                  <div className="h-7 w-12 rounded-full bg-gold-500 text-white font-mono text-[10px] font-bold flex items-center justify-center shrink-0 shadow-md">
-                    2015
+                  <div className="h-7 w-12 rounded-full bg-primary text-white font-mono text-[10px] font-bold flex items-center justify-center shrink-0 shadow-md">
+                    2022
                   </div>
                   <div>
-                    <h4 className="font-serif text-sm font-bold text-slate-800">Youngest LIC Galaxy Club Member</h4>
-                    <p className="text-[11px] text-slate-500 mt-1">Achieved elite status as the youngest member in the region, managing complex wealth portfolios.</p>
+                    <h4 className="font-serif text-sm font-bold text-slate-800">Financial Journey Starts</h4>
+                    <p className="text-[11px] text-slate-500 mt-1">Began LIC advisory in Pune with a focus on term protection and claim processing.</p>
                   </div>
                 </div>
               </div>
@@ -737,22 +850,22 @@ export default function Home({ onOpenModal }) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-            {/* Card 1 */}
+            {/* Card 1: Family Protection */}
             <div className="flip-card">
               <div className="flip-card-inner">
                 <div className="flip-card-front p-6 flex flex-col justify-between items-center text-center">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary mt-6">
-                    <Shield className="h-7 w-7 text-primary" />
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 dark:bg-indigo-950/20 text-indigo-500 mt-6 shadow-inner">
+                    <Shield className="h-7 w-7 text-indigo-500" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-lg font-bold text-slate-800">Family Protection</h3>
+                    <h3 className="font-serif text-lg font-bold text-indigo-650 dark:text-indigo-400">Family Protection</h3>
                     <p className="mt-2 text-[11px] text-slate-500 leading-relaxed px-2">
                       Securing high-cover pure term structures to buffer children's lifestyle against loan burdens.
                     </p>
                   </div>
-                  <span className="text-[10px] text-primary font-bold uppercase tracking-wider mb-2">Hover for details</span>
+                  <span className="text-[10px] text-indigo-500 font-bold uppercase tracking-wider mb-2">Hover for details</span>
                 </div>
-                <div className="flip-card-back p-6 flex flex-col justify-center items-center text-center">
+                <div className="flip-card-back !bg-gradient-to-br !from-indigo-600 !to-indigo-400 !border-indigo-500/20 p-6 flex flex-col justify-center items-center text-center">
                   <h4 className="font-serif text-base font-bold mb-2">Term Allocation</h4>
                   <p className="text-[11px] leading-relaxed mb-4">
                     10x-15x income replacement mapping, corporate health floaters, and MWP Act trusts.
@@ -764,22 +877,22 @@ export default function Home({ onOpenModal }) {
               </div>
             </div>
 
-            {/* Card 2 */}
+            {/* Card 2: Child Education Planning */}
             <div className="flip-card">
               <div className="flip-card-inner">
                 <div className="flip-card-front p-6 flex flex-col justify-between items-center text-center">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary mt-6">
-                    <GraduationCap className="h-7 w-7 text-primary" />
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-50 dark:bg-rose-950/20 text-rose-500 mt-6 shadow-inner">
+                    <GraduationCap className="h-7 w-7 text-rose-500" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-lg font-bold text-slate-800">Child Education Planning</h3>
+                    <h3 className="font-serif text-lg font-bold text-rose-650 dark:text-rose-400">Child Education Planning</h3>
                     <p className="mt-2 text-[11px] text-slate-500 leading-relaxed px-2">
                       Fulfillment funds mapped to expected tuition inflation ratios in India or abroad.
                     </p>
                   </div>
-                  <span className="text-[10px] text-primary font-bold uppercase tracking-wider mb-2">Hover for details</span>
+                  <span className="text-[10px] text-rose-500 font-bold uppercase tracking-wider mb-2">Hover for details</span>
                 </div>
-                <div className="flip-card-back p-6 flex flex-col justify-center items-center text-center">
+                <div className="flip-card-back !bg-gradient-to-br !from-rose-600 !to-rose-400 !border-rose-500/20 p-6 flex flex-col justify-center items-center text-center">
                   <h4 className="font-serif text-base font-bold mb-2">Milestone Advisory</h4>
                   <p className="text-[11px] leading-relaxed mb-4">
                     Target-date index mapping, sovereign gold bonds setup, and tax-exempt tuition reserves.
@@ -791,22 +904,22 @@ export default function Home({ onOpenModal }) {
               </div>
             </div>
 
-            {/* Card 3 */}
+            {/* Card 3: Retirement Security */}
             <div className="flip-card">
               <div className="flip-card-inner">
                 <div className="flip-card-front p-6 flex flex-col justify-between items-center text-center">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary mt-6">
-                    <Heart className="h-7 w-7 text-primary" />
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-50 dark:bg-amber-950/20 text-amber-500 mt-6 shadow-inner">
+                    <Heart className="h-7 w-7 text-amber-500" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-lg font-bold text-slate-800">Retirement Security</h3>
+                    <h3 className="font-serif text-lg font-bold text-amber-650 dark:text-amber-400">Retirement Security</h3>
                     <p className="mt-2 text-[11px] text-slate-500 leading-relaxed px-2">
                       Regular tax-free annuity plans that maintain self-sufficiency post-employment.
                     </p>
                   </div>
-                  <span className="text-[10px] text-primary font-bold uppercase tracking-wider mb-2">Hover for details</span>
+                  <span className="text-[10px] text-amber-500 font-bold uppercase tracking-wider mb-2">Hover for details</span>
                 </div>
-                <div className="flip-card-back p-6 flex flex-col justify-center items-center text-center">
+                <div className="flip-card-back !bg-gradient-to-br !from-amber-600 !to-amber-400 !border-amber-500/20 p-6 flex flex-col justify-center items-center text-center">
                   <h4 className="font-serif text-base font-bold mb-2">Guaranteed Annuity</h4>
                   <p className="text-[11px] leading-relaxed mb-4">
                     Systematic retirement withdrawals review, NPS allocation, and rate locking structures.
@@ -818,22 +931,22 @@ export default function Home({ onOpenModal }) {
               </div>
             </div>
 
-            {/* Card 4 */}
+            {/* Card 4: Legacy Planning */}
             <div className="flip-card">
               <div className="flip-card-inner">
                 <div className="flip-card-front p-6 flex flex-col justify-between items-center text-center">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary mt-6">
-                    <Landmark className="h-7 w-7 text-primary" />
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 dark:bg-teal-950/20 text-teal-500 mt-6 shadow-inner">
+                    <Landmark className="h-7 w-7 text-teal-500" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-lg font-bold text-slate-800">Legacy Planning</h3>
+                    <h3 className="font-serif text-lg font-bold text-teal-650 dark:text-teal-400">Legacy Planning</h3>
                     <p className="mt-2 text-[11px] text-slate-500 leading-relaxed px-2">
                       Structured estate allocation avoiding inheritance disputes and minimizing capital taxes.
                     </p>
                   </div>
-                  <span className="text-[10px] text-primary font-bold uppercase tracking-wider mb-2">Hover for details</span>
+                  <span className="text-[10px] text-teal-500 font-bold uppercase tracking-wider mb-2">Hover for details</span>
                 </div>
-                <div className="flip-card-back p-6 flex flex-col justify-center items-center text-center">
+                <div className="flip-card-back !bg-gradient-to-br !from-teal-600 !to-teal-400 !border-teal-500/20 p-6 flex flex-col justify-center items-center text-center">
                   <h4 className="font-serif text-base font-bold mb-2">Estate Handover</h4>
                   <p className="text-[11px] leading-relaxed mb-4">
                     Nomination reviews, legal Will assistance, and high-net-worth estate preservation tactics.
@@ -895,13 +1008,13 @@ export default function Home({ onOpenModal }) {
 
             <div className="grid grid-cols-2 gap-6 pt-4">
               <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md">
-                <span className="block font-serif text-xl font-bold text-gold-500">MDRT USA</span>
-                <span className="text-[9px] uppercase tracking-widest text-slate-400 font-semibold mt-1 block">Lifetime Member</span>
+                <span className="block font-serif text-xl font-bold text-gold-500">MDRT (USA)</span>
+                <span className="text-[9px] uppercase tracking-widest text-slate-400 font-semibold mt-1 block">Six Times in Row</span>
               </div>
 
               <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md">
-                <span className="block font-serif text-xl font-bold text-gold-500">500Cr+</span>
-                <span className="text-[9px] uppercase tracking-widest text-slate-400 font-semibold mt-1 block">Coverage Secured</span>
+                <span className="block font-serif text-xl font-bold text-gold-500">Galaxy Club</span>
+                <span className="text-[9px] uppercase tracking-widest text-slate-400 font-semibold mt-1 block">Youngest LIC Member</span>
               </div>
             </div>
           </div>
@@ -1221,7 +1334,7 @@ export default function Home({ onOpenModal }) {
                 <Users className="h-5 w-5" />
               </motion.div>
               <h3 className="font-serif text-sm font-bold text-slate-800 dark:text-white mb-2">Trusted Guidance</h3>
-              <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed">15+ years navigating claims, tax transitions, and market cycles.</p>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-relaxed">18+ years navigating claims, tax transitions, and market cycles.</p>
             </motion.div>
 
             {/* Card 3: Transparent Advice */}
@@ -1389,77 +1502,183 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 11. CLIENT SUCCESS STORIES */}
-      <section className="py-24 bg-white">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+      <section
+        ref={testimonialSectionRef}
+        className="relative py-24 bg-white overflow-hidden border-t border-slate-100"
+      >
+        {/* Background Particles / Elements for a Premium Feel */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          <div className="absolute top-1/4 left-10 w-72 h-72 rounded-full bg-primary/5 blur-[120px]" />
+          <div className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-secondary/5 blur-[150px]" />
+          {/* Subtle grid pattern */}
+          <div className="absolute inset-0 opacity-[0.015] bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:24px_24px]" />
+          {/* Breathing particle floaters */}
+          <div className="absolute top-12 left-1/3 w-3 h-3 rounded-full bg-primary/10 animate-pulse" style={{ animationDuration: '3.5s' }} />
+          <div className="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-secondary/15 animate-ping" style={{ animationDuration: '5s' }} />
+          <div className="absolute bottom-24 left-1/4 w-2.5 h-2.5 rounded-full bg-primary/10 animate-pulse" style={{ animationDuration: '4.5s' }} />
+          <div className="absolute bottom-12 right-1/3 w-1.5 h-1.5 rounded-full bg-secondary/20 animate-pulse" style={{ animationDuration: '3s' }} />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="text-sm font-semibold tracking-widest text-primary uppercase">Client Stories</span>
             <h2 className="font-serif text-3xl font-bold text-slate-800 mt-1">Client Success Stories</h2>
             <div className="mx-auto mt-4 h-1 w-20 bg-primary rounded-full" />
           </div>
 
-          <div className="relative bg-[#FAF8F5] rounded-3xl p-8 md:p-12 border border-slate-100 overflow-hidden shadow-xl">
-            <Quote className="absolute right-8 top-8 h-24 w-24 text-primary/5 shrink-0" />
+          {/* Desktop & Tablet View: 3x2 Grid (Desktop) and 2x3 Grid (Tablet) */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, idx) => {
+              const cardVariants = {
+                hidden: { opacity: 0, y: 50 },
+                visible: (i) => ({
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.8,
+                    delay: i * 0.15,
+                    ease: [0.25, 1, 0.5, 1]
+                  }
+                })
+              };
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTestimonial}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.4 }}
-                className="space-y-6"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="flex gap-1">
-                    {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                      <Star key={i} className="h-4.5 w-4.5 fill-current text-gold-500" />
-                    ))}
+              return (
+                <motion.div
+                  key={idx}
+                  custom={idx}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.1 }}
+                  variants={cardVariants}
+                  className="h-full"
+                >
+                  <div className={`testimonial-card testimonial-float-${idx} h-full bg-white p-8 rounded-3xl border border-slate-100 flex flex-col justify-between shadow-sm`}>
+                    <div className="space-y-5">
+                      <div className="flex items-center justify-between">
+                        <div className="flex gap-0.5">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star key={i} className="h-4 w-4 fill-current text-gold-500" />
+                          ))}
+                        </div>
+                        <Quote className="h-8 w-8 text-primary/10 shrink-0" />
+                      </div>
+
+                      <p className="text-sm text-slate-650 leading-relaxed italic">
+                        "{testimonial.text}"
+                      </p>
+                    </div>
+
+                    <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="w-11 h-11 rounded-full object-cover border border-slate-100 shadow-sm shrink-0"
+                          loading="lazy"
+                        />
+                        <div>
+                          <span className="block font-serif text-sm font-bold text-slate-800">
+                            {testimonial.name}
+                          </span>
+                          <span className="block text-[11px] text-slate-400 font-semibold mt-0.5">
+                            {testimonial.role}
+                          </span>
+                        </div>
+                      </div>
+
+                      {testimonial.youtubeLink && (
+                        <a
+                          href={testimonial.youtubeLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-50 hover:bg-red-100 text-red-600 transition-all hover:scale-105 shadow-sm border border-red-200/20 cursor-pointer shrink-0"
+                          title="Watch on YouTube"
+                        >
+                          <svg className="h-4.5 w-4.5 fill-current text-red-600" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.387.507A3.003 3.003 0 0 0 .502 6.163C0 8.07 0 12 0 12s0 3.93.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.507 9.387.507 9.387.507s7.517 0 9.387-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.93 24 12 24 12s0-3.93-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                          </svg>
+                          <span className="text-[11.5px] font-extrabold tracking-wide text-red-600">YouTube</span>
+                        </a>
+                      )}
+                    </div>
                   </div>
+                </motion.div>
+              );
+            })}
+          </div>
 
-                  {testimonials[activeTestimonial].youtubeLink && (
-                    <a
-                      href={testimonials[activeTestimonial].youtubeLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50 hover:bg-red-100 dark:bg-red-950/20 dark:hover:bg-red-950/40 text-red-600 dark:text-red-400 text-xs font-bold transition-all shadow-sm border border-red-200/20 dark:border-red-900/30 cursor-pointer self-start sm:self-auto"
-                    >
-                      <svg className="h-4.5 w-4.5 fill-current text-red-600 dark:text-red-400" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.387.507A3.003 3.003 0 0 0 .502 6.163C0 8.07 0 12 0 12s0 3.93.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.507 9.387.507 9.387.507s7.517 0 9.387-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.93 24 12 24 12s0-3.93-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                      </svg>
-                      <span>Watch Success Story</span>
-                    </a>
-                  )}
-                </div>
+          {/* Mobile View: Autoplay Swipeable Slider */}
+          <div className="block md:hidden relative w-full overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${mobileIndex * 100}%)` }}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              {testimonials.map((testimonial, idx) => (
+                <div key={idx} className="w-full shrink-0 px-2 pb-6">
+                  <div className="testimonial-card bg-white p-8 rounded-3xl border border-slate-100 flex flex-col justify-between shadow-md min-h-[300px]">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex gap-0.5">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star key={i} className="h-4 w-4 fill-current text-gold-500" />
+                          ))}
+                        </div>
+                        <Quote className="h-8 w-8 text-primary/10 shrink-0" />
+                      </div>
 
-                <p className="font-serif text-base md:text-lg italic text-slate-700 dark:text-slate-200 leading-relaxed">
-                  "{testimonials[activeTestimonial].text}"
-                </p>
+                      <p className="text-sm text-slate-650 leading-relaxed italic">
+                        "{testimonial.text}"
+                      </p>
+                    </div>
 
-                <div className="pt-6 border-t border-slate-200/50 dark:border-slate-700/50 flex items-center gap-4">
-                  <img
-                    src={testimonials[activeTestimonial].image}
-                    alt={testimonials[activeTestimonial].name}
-                    className="w-12 h-12 rounded-full object-cover border-2 border-primary/20 shadow-md shrink-0"
-                    loading="lazy"
-                  />
-                  <div>
-                    <span className="block font-serif text-base font-bold text-primary dark:text-blue-400">
-                      {testimonials[activeTestimonial].name}
-                    </span>
-                    <span className="block text-xs text-slate-400 font-semibold mt-0.5">
-                      {testimonials[activeTestimonial].role}
-                    </span>
+                    <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="w-11 h-11 rounded-full object-cover border border-slate-100 shadow-sm shrink-0"
+                          loading="lazy"
+                        />
+                        <div>
+                          <span className="block font-serif text-sm font-bold text-slate-800">
+                            {testimonial.name}
+                          </span>
+                          <span className="block text-[11px] text-slate-400 font-semibold mt-0.5">
+                            {testimonial.role}
+                          </span>
+                        </div>
+                      </div>
+
+                      {testimonial.youtubeLink && (
+                        <a
+                          href={testimonial.youtubeLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-50 hover:bg-red-100 text-red-600 transition-all hover:scale-105 shadow-sm border border-red-200/20 cursor-pointer shrink-0"
+                          title="Watch on YouTube"
+                        >
+                          <svg className="h-4.5 w-4.5 fill-current text-red-600" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.516 0-9.387.507A3.003 3.003 0 0 0 .502 6.163C0 8.07 0 12 0 12s0 3.93.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.507 9.387.507 9.387.507s7.517 0 9.387-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.93 24 12 24 12s0-3.93-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                          </svg>
+                          <span className="text-[11.5px] font-extrabold tracking-wide text-red-600">YouTube</span>
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+              ))}
+            </div>
 
-            <div className="flex justify-center gap-2 mt-8">
+            {/* Pagination Indicator Dots */}
+            <div className="flex justify-center gap-2 mt-4">
               {testimonials.map((_, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setActiveTestimonial(idx)}
-                  className={`h-2 w-2 rounded-full transition-all cursor-pointer ${activeTestimonial === idx ? 'w-6 bg-primary' : 'bg-slate-300'
+                  onClick={() => setMobileIndex(idx)}
+                  className={`h-2 rounded-full transition-all cursor-pointer ${mobileIndex === idx ? 'w-6 bg-primary' : 'w-2 bg-slate-300'
                     }`}
                   aria-label={`Slide ${idx + 1}`}
                 />

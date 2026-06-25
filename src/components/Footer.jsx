@@ -49,7 +49,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3 text-xs text-slate-600">
                 <Shield className="h-4.5 w-4.5 text-gold-500" />
-                <span>15+ Years of Dedicated Service</span>
+                <span>18+ Years of Dedicated Service</span>
               </div>
             </div>
           </div>
